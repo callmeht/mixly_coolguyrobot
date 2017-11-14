@@ -1,0 +1,152 @@
+	<!-- type="company" 
+	block="block/coolguyrobot.js" 
+	generator="generator/coolguyrobot.js"  
+	language="language/"
+	lib="coolguyrobot/"
+	 media="media/coolguyrobot" 
+	-->
+	<script type="text/javascript" src="../../blocks/company/coolguyrobot.js"></script>
+	<script type="text/javascript" src="../../generators/arduino/company/coolguyrobot.js"></script>
+
+<category id="catCOOLGUYROBOT_1" name="酷哥机器人" colour="20">
+		<category id="catCOOLGUYROBOT_3" name="其他串口模块" colour="20">
+			<block type="coolguy_serial1">
+				<value name="TEXT3">
+					<block type="text">
+						<field name="TEXT">on</field>
+					</block>
+				</value>
+			</block>
+			<block type="coolguy_serial2">
+				<value name="TEXT3">
+					<block type="text">
+						<field name="TEXT">Hello world!</field>
+					</block>
+				</value>
+			</block>
+			<block type="coolguy_serial3">
+				<value name="TEXT3">
+					<block type="text">
+						<field name="TEXT">Hello world!</field>
+					</block>
+				</value>
+			</block>
+		</category>	
+
+
+
+
+		<category id="catCOOLGUYROBOT_3" name="循线模块" colour="20">
+		    <block type="coolguy_line_set">
+		    	<value name="num1"><shadow type="math_number"><field name="NUM">400</field></shadow></value>
+		    	<value name="num2"><shadow type="math_number"><field name="NUM">400</field></shadow></value>
+		    	<value name="num3"><shadow type="math_number"><field name="NUM">400</field></shadow></value>
+		    	<value name="num4"><shadow type="math_number"><field name="NUM">400</field></shadow></value>
+		    	<value name="num5"><shadow type="math_number"><field name="NUM">400</field></shadow></value>
+		    </block>
+		    <block type="coolguy_line_port"></block>
+		    <block type="coolguy_line1">
+		    	<value name="num1"><shadow type="math_number"><field name="NUM">200</field></shadow></value>
+		    	<value name="num2"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+		    	<value name="num3"><shadow type="math_number"><field name="NUM">0.1</field></shadow></value>
+		    </block>
+		    <block type="coolguy_line2">
+		    	<value name="num1"><shadow type="math_number"><field name="NUM">200</field></shadow></value>
+		    	<value name="num2"><shadow type="math_number"><field name="NUM">5</field></shadow></value>
+		    </block>
+		    <block type="coolguy_line3">
+		    	<value name="num1"><shadow type="math_number"><field name="NUM">200</field></shadow></value>
+		    	<value name="num2"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+		    </block>
+		    <block type="coolguy_line4">
+		    	<value name="num1"><shadow type="math_number"><field name="NUM">200</field></shadow></value>
+		    	<value name="num2"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+		    </block>
+		    <block type="coolguy_line5"></block>
+		</category>	
+		<category id="catCOOLGUYROBOT_3" name="超声波模块" colour="20">
+			<block type="coolguy_ultrasonic_already"><value name="PIN"><shadow type="pins_analog"></shadow></value></block>
+	  		<block type="coolguy_ultrasonic_setup"><value name="PIN"><shadow type="pins_analog"></shadow></value></block>	
+		</category>	
+		<category id="catCOOLGUYROBOT_3" name="红外遥控模块" colour="20">
+			<block type="coolguy_remotecontrol"><value name="PIN1"><block type="text"><field name="PIN1"></field></block>
+		</category>	
+		<category id="catCOOLGUYROBOT_3" name="其他传感器模块" colour="20">
+			<block type="coolguy_record_setup"></block>
+			<block type="coolguy_record1"></block>	
+			<block type="coolguy_record2"></block>	
+			<block type="coolguy_record3"></block>
+			<block type="coolguy_temp_setup"><value name="PIN"><shadow type="pins_analog"></shadow></value></block>		
+	  		<block type="coolguy_airquality">
+	  			<value name="PIN">
+	  				<shadow type="pins_analog">
+	  				</shadow>
+	  			</value>
+	  		</block>
+
+			<block type="coolguy_sensor_sound">
+				<value name="PIN">
+					<shadow type="pins_analog">
+					</shadow>
+				</value>
+			</block>	
+			<block type="coolguy_sensor_irranging"><value name="PIN"><shadow type="pins_analog"></shadow></value></block>
+	  		<block type="coolguy_sensor_photo"><value name="PIN"><shadow type="pins_analog"></shadow></value></block>
+			<block type="coolguy_sensor_switch"><value name="PIN"><shadow type="pins_analog"></shadow></value></block>
+			<block type="coolguy_sensor_fire"><value name="PIN"><shadow type="pins_analog"></shadow></value></block>
+			<block type="coolguy_sensor_shock"><value name="PIN"><shadow type="pins_analog"></shadow></value></block>
+			<block type="coolguy_sensor_touch"><value name="PIN"><shadow type="pins_analog"></shadow></value></block>
+		</category>	
+		<category id="catCOOLGUYROBOT_3" name="电机模块" colour="20">
+		    <block type="coolguy_motor_left">
+		    	<value name="num"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+		    </block>
+		    <block type="coolguy_motor_right">
+		    	<value name="num"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+		    </block>	
+		</category>	
+		<category id="catCOOLGUYROBOT_3" name="LED/LCD模块" colour="20">
+			
+			<block type="coolguy_oled1">
+				<value name="TEXT3">
+					<block type="text">
+						<field name="TEXT">Hello World!</field>
+					</block>
+				</value>
+			</block>
+
+			<block type="coolguy_oled2">
+				<value name="num">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+			</block>	
+
+		 	<block type="coolguy_oled3"></block>	
+		 	<block type="coolguy_Nixietube">
+				<value name="num">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+			</block>	
+	    	<block type="coolguy_ledmo"><value name="PIN1"><block type="text"><field name="PIN1"></field></block>
+		</category>	
+
+	<category id="catCOOLGUYROBOT_2" name="系统自带模块" colour="20">
+		  	<block type="coolguy_analog_reading"></block>
+		  	<block type="coolguy_digital_reading"></block>
+			<block type="coolguy_pwm"></block> 	
+	  		<block type="coolguy_timer"></block>	
+		</category>				
+</category><!-- 1级目录
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+#class (KEYWORD1)
+CoolGuyModule_IR	KEYWORD1
+CoolGuyModule_Ultrasonic	KEYWORD1
+CoolGuyModule_WalkLine	KEYWORD1
+
+#function and method (KEYWORD2)
+CoolGuyModule_IR	KEYWORD2
+CoolGuyModule_Ultrasonic	KEYWORD2
+CoolGuyModule_WalkLine		KEYWORD2
+SetComparisonValue	KEYWORD2
+RunWalkLine	KEYWORD2
+RunWalkLine_Timer	KEYWORD2
+RunWalkLine_Trigger	KEYWORD2
+
+#constant (LITERAL1)
+ColorComparison_Buf1	LITERAL1
+ColorComparison_Buf2	LITERAL1
+ColorComparison_Buf3	LITERAL1
+ColorComparison_Buf4	LITERAL1
+ColorComparison_Buf5	LITERAL1
+
+#none
