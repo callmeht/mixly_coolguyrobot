@@ -1056,3 +1056,5 @@ Blockly.MIXLY_record3="播放录音";
 //20171031数码管模块
 Blockly.MIXLY_Nixietube="数码管显示";
 Blockly.MIXLY_PORT="端口";
+//20171119端口初始化，全部数字端口设置为输出
+Blockly.MIXLY_ALLPORTINITIAL="端口初始化  ";

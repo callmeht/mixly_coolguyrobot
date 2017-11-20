@@ -635,3 +635,14 @@ Blockly.Blocks.coolguy_record3 = {
     this.setNextStatement(true, null);
   }
 };
+
+Blockly.Blocks.coolguy_allportinitial = {
+  init: function() {
+    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_ALLPORTINITIAL);
+    this.setInputsInline(true);//设置为同一行，false为换行
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};

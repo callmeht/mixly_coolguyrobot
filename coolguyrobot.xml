@@ -134,7 +134,8 @@
 	    	<block type="coolguy_ledmo"><value name="PIN1"><block type="text"><field name="PIN1"></field></block>
 		</category>	
 
-	<category id="catCOOLGUYROBOT_2" name="系统自带模块" colour="20">
+	<category id="catCOOLGUYROBOT_2" name="系统模块" colour="20">
+		    <block type="coolguy_allportinitial"></block>
 		  	<block type="coolguy_analog_reading"></block>
 		  	<block type="coolguy_digital_reading"></block>
 			<block type="coolguy_pwm"></block> 	

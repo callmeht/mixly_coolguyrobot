@@ -2,7 +2,6 @@
 #define __WTR050_H_
 
 #include <Arduino.h>
-#include <SoftwareSerial.h>
 
 class wtr050
 {
@@ -11,5 +10,8 @@ public:
 	void record_start(void);
 	void record_stop(void);
 	void play(void);
+private:
+	int pin;
+	void send_byte(uint8_t dat);
 };
 #endif
