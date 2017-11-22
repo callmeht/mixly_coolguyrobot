@@ -40,7 +40,8 @@ Blockly.Arduino.coolguy_sensor_sound = function() {
   //var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN',Blockly.Arduino.ORDER_ATOMIC);
  // var dropdown_stat = this.getTitleValue('STAT');
     Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  //Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
   var code = '!digitalRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -51,7 +52,8 @@ Blockly.Arduino.coolguy_sensor_irranging = function() {
   //var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN',Blockly.Arduino.ORDER_ATOMIC);
  // var dropdown_stat = this.getTitleValue('STAT');
     Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  //Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
   var code = '!digitalRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -62,7 +64,8 @@ Blockly.Arduino.coolguy_sensor_photo = function() {
   //var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN',Blockly.Arduino.ORDER_ATOMIC);
  // var dropdown_stat = this.getTitleValue('STAT');
     Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
- // Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
   var code = '!digitalRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -74,7 +77,8 @@ Blockly.Arduino.coolguy_sensor_switch = function() {
   //var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN',Blockly.Arduino.ORDER_ATOMIC);
  // var dropdown_stat = this.getTitleValue('STAT');
     Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  //Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
   var code = '!digitalRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -85,7 +89,8 @@ Blockly.Arduino.coolguy_sensor_fire = function() {
   //var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN',Blockly.Arduino.ORDER_ATOMIC);
  // var dropdown_stat = this.getTitleValue('STAT');
     Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-// Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+ Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
   var code = '!digitalRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -96,7 +101,8 @@ Blockly.Arduino.coolguy_sensor_shock = function() {
   //var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN',Blockly.Arduino.ORDER_ATOMIC);
  // var dropdown_stat = this.getTitleValue('STAT');
     Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
- // Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+ Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
   var code = '!digitalRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -107,7 +113,8 @@ Blockly.Arduino.coolguy_sensor_touch = function() {
   //var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN',Blockly.Arduino.ORDER_ATOMIC);
  // var dropdown_stat = this.getTitleValue('STAT');
     Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-// Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+ Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
   var code = '!digitalRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -412,7 +419,9 @@ Blockly.Arduino.coolguy_digital_reading = function() {
    var dropdown_pin = this.getTitleValue('PIN');
    Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
    //Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   Blockly.Arduino.setups_['setup_coolguy_digital_reading']=' pinMode('+dropdown_pin+',INPUT);';
+    Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
+ //  Blockly.Arduino.setups_['setup_coolguy_digital_reading']=' pinMode('+dropdown_pin+',INPUT);';
   //var code = 'CoolGuyModule_WalkLine:: RightMotorSpeed ('+num+')';
    var code = '!digitalRead('+dropdown_pin+')';
    // return code;
@@ -425,7 +434,7 @@ Blockly.Arduino.coolguy_pwm = function() {
    var pwm_num = this.getTitleValue('PWM_NUM');
     Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
   // Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-    Blockly.Arduino.setups_['setup_coolguy_pwm']='pinMode('+dropdown_pin+',OUTPUT);';
+//    Blockly.Arduino.setups_['setup_coolguy_pwm']='pinMode('+dropdown_pin+',OUTPUT);';
   //var code = '';
    var code = 'analogWrite('+dropdown_pin+','+pwm_num+');\n';
     return code;
@@ -438,7 +447,7 @@ Blockly.Arduino.coolguy_servo = function() {
     Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
     Blockly.Arduino.definitions_['define_"servo']='#include <Servo.h>';
   // Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-    Blockly.Arduino.setups_['setup_coolguy_pwm']='servo_'+dropdown_pin+'.attach('+dropdown_pin+');';
+    Blockly.Arduino.setups_['setup_coolguy_servo'+dropdown_pin]='servo_'+dropdown_pin+'.attach('+dropdown_pin+');';
   //var code = '';
    var code = 'servo_'+dropdown_pin+'.write('+servo_num+');\n';
     return code;
