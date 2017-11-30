@@ -105,9 +105,9 @@
 		    	<value name="num"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
 		    </block>	
 		</category>	
-		<category id="catCOOLGUYROBOT_3" name="LED/LCD模块" colour="20">
+		<category id="catCOOLGUYROBOT_3" name="LED/OLED模块" colour="20">
 			
-			<block type="coolguy_oled1">
+			<block type="coolguy_oled_English">
 				<value name="TEXT3">
 					<block type="text">
 						<field name="TEXT">Hello World!</field>
@@ -115,7 +115,7 @@
 				</value>
 			</block>
 
-			<block type="coolguy_oled2">
+			<block type="coolguy_oled_number">
 				<value name="num">
 					<shadow type="math_number">
 						<field name="NUM">0</field>
@@ -131,7 +131,7 @@
 					</shadow>
 				</value>
 			</block>	
-	    	<block type="coolguy_ledmo"><value name="PIN1"><block type="text"><field name="PIN1"></field></block>
+	    	<block type="coolguy_led"><value name="PIN1"><block type="text"><field name="PIN1"></field></block>
 		</category>	
 
 	<category id="catCOOLGUYROBOT_2" name="系统模块" colour="20">
