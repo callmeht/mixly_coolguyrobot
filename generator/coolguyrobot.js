@@ -4,21 +4,167 @@ goog.provide('Blockly.Arduino.coolguyrobot');
 
 goog.require('Blockly.Arduino');
 
+/*                     其他串口模块                      */
+/*设定比较内容*/
+Blockly.Arduino.coolguy_serial_content_set = function() {
+  var str3 = Blockly.Arduino.valueToCode(this, 'TEXT3', Blockly.Arduino.ORDER_ATOMIC) || 'String(\"\")'
+  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+  var code = 'CoolGuyModule_StringCmp::SetString('+str3+');\n';
+  return code;
+};
 
+/*比较内容完全相同*/
+Blockly.Arduino.coolguy_serial_content_compare_allsame = function() {
+  var str3 = Blockly.Arduino.valueToCode(this, 'TEXT3', Blockly.Arduino.ORDER_ATOMIC) || 'String(\"\")'
+  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+  Blockly.Arduino.setups_['setup_coolguy_serial2'] = 'Serial.setTimeout(100);\n';
+  var code = 'CoolGuyModule_StringCmp:: Compare_StringEqual('+str3+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
 
-/////////////////////////////传感器模块/////////////////////////////////////////////////
-/////////////////////////////传感器模块/////////////////////////////////////////////////
-/////////////////////////////传感器模块/////////////////////////////////////////////////
-/////////////////////////////传感器模块/////////////////////////////////////////////////
-/////温度传感器模块////////读温度值在引脚COOLGUY_ANALOG_INPUT/////coolguy_temp_setup
-Blockly.Arduino.coolguy_temp_setup = function() {
+/*比较内容包含*/
+Blockly.Arduino.coolguy_serial_content_compare_include = function() {
+  var str3 = Blockly.Arduino.valueToCode(this, 'TEXT3', Blockly.Arduino.ORDER_ATOMIC) || 'String(\"\")'
+  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+  Blockly.Arduino.setups_['setup_coolguy_serial2'] = 'Serial.setTimeout(100);\n';
+  var code = 'CoolGuyModule_StringCmp:: Compare_IncludeString ('+str3+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};/*                     其他串口模块结束                   */
+
+/*                       循线模块                          */
+/*设置五灰度比较值*/
+Blockly.Arduino.coolguy_line_cmp_valueset = function() {
+   var num1 = Blockly.Arduino.valueToCode(this, 'num1', Blockly.Arduino.ORDER_ATOMIC);//Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_NONE) || '0';
+   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var num3 = Blockly.Arduino.valueToCode(this, 'num3',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var num4 = Blockly.Arduino.valueToCode(this, 'num4',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var num5 = Blockly.Arduino.valueToCode(this, 'num5',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+   var code = 'CoolGuyModule_WalkLine::SetComparisonValue('+num1+','+num2+','+num3+','+num4+','+num5+');\n';
+    return code;
+};
+
+/*设置五灰度端口*/
+Blockly.Arduino.coolguy_line_portset = function() {
+   var dropdown_pin = this.getTitleValue('PIN');
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+   var code = 'CoolGuyModule_WalkLine::WalkLine_Init('+dropdown_pin+');\n';
+   return code;
+};
+
+/*路口过冲设定*/
+Blockly.Arduino.coolguy_line_crossroad = function() {
+   var num1 = Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//转速
+   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//路口数
+   var num3 = Blockly.Arduino.valueToCode(this, 'num3',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//秒
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+   var code = 'CoolGuyModule_WalkLine::RunWalkLine('+num2+','+num1+','+num3+');\n';
+  return code;
+};
+
+/*巡线时间设定*/
+Blockly.Arduino.coolguy_line_time = function() {
+   var num1 = Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//转速
+   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//路口数
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+   var code = 'CoolGuyModule_WalkLine::RunWalkLine_Timer('+num1+','+num2+');\n';
+  return code;
+};
+
+/*左转弯设定*/
+Blockly.Arduino.coolguy_line_turnleft = function() {
+   var num1 = Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//转速
+   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//几线
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+   var code = 'CoolGuyModule_WalkLine::RunWalkLine_Turn(0,'+num1+','+num2+');\n';
+   return code;
+};
+
+/*右转弯设定*/
+Blockly.Arduino.coolguy_line_turnright  = function() {
+   var num1 = Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//转速
+   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//几线
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+   var code = 'CoolGuyModule_WalkLine::RunWalkLine_Turn(1,'+num1+','+num2+');\n';
+   return code;
+};
+
+/*选择五灰度传感器*/
+Blockly.Arduino.coolguy_line_sensorchoose = function() {
+   var dropdown_pin = this.getTitleValue('PIN');
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+   var code = 'CoolGuyModule_WalkLine::GrayValue_ReadOne('+dropdown_pin+')';
+   return [code, Blockly.Arduino.ORDER_ATOMIC];
+};/*                       循线模块结束                          */
+
+/*                      超声波模块                             */
+/*一体超声波 置于五灰度传感器上 无需设置端口*/
+Blockly.Arduino.coolguy_ultrasonic_already = function() {
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+  var code = 'CoolGuyModule_WalkLine::GetUltrasonicVal()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/*读扩展超声波距离*/
+Blockly.Arduino.coolguy_ultrasonic_setup = function() {
+   var dropdown_pin = this.getTitleValue('PIN');
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+  var code = 'CoolGuyModule_Sensor:: Read_UltrasonicVal ('+dropdown_pin+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};/*                      超声波模块结束                          */
+
+/*                      红外遥控器模块                          */
+/*红外遥控器 遥控通道(1~8）  （无、上、下、左、右、上+B、下+B、左+B、右+B）键按下 引脚（IO2、IO3）*/
+Blockly.Arduino.coolguy_remotecontrol = function() {
+  var dropdown_pin1 = this.getTitleValue('PIN1');
+  var dropdown_pin2 = this.getTitleValue('PIN2');
+  var dropdown_pin3 = this.getTitleValue('PIN3');
+  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+  Blockly.Arduino.setups_['setup_coolguy_remotecontrol_'+dropdown_pin3]='CoolGuyModule_IR:: IR_Init('+dropdown_pin3+');';
+  var code = 'CoolGuyModule_IR::IR_KeyValueCmp('+dropdown_pin2+','+dropdown_pin1+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};/*                      红外遥控器模块结束                          */
+
+/*                    其他传感器模块                     */
+/*设置录音模块端口模块*/
+Blockly.Arduino.coolguy_record_portsetup = function() {
+   var dropdown_pin = this.getTitleValue('PIN');
+   Blockly.Arduino.definitions_['define_"record'] = '#include <wtr050.h>';
+   Blockly.Arduino.definitions_['define_"record_setup'+dropdown_pin] = 'wtr050 wtr050_1('+dropdown_pin+');';
+   var code = '';
+   return code;
+};
+
+/*开始录音*/
+Blockly.Arduino.coolguy_record_start = function() {
+  Blockly.Arduino.definitions_['define_"record'] = '#include <wtr050.h>';
+  var code = 'wtr050_1.record_start();\n';
+  return code;
+};
+
+/*停止录音*/
+Blockly.Arduino.coolguy_record_stop = function() {
+  Blockly.Arduino.definitions_['define_"record'] = '#include <wtr050.h>';
+  var code = 'wtr050_1.record_stop();\n';
+  return code;
+};
+
+/*播放录音*/
+Blockly.Arduino.coolguy_record_play = function() {
+  Blockly.Arduino.definitions_['define_"record'] = '#include <wtr050.h>';
+  var code = 'wtr050_1.play();\n';
+  return code;
+};
+
+/*温度传感器模块*/
+Blockly.Arduino.coolguy_temp_get = function() {
    var dropdown_pin = this.getTitleValue('PIN');
    Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
    var code = 'CoolGuyModule_Sensor::Read_Temperature('+dropdown_pin+')';
    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-/////空气质量模块////////读空气质量在引脚COOLGUY_ANALOG_INPUT/////coolguy_airquality
+/*空气质量检测模块*/
 Blockly.Arduino.coolguy_airquality = function() {
    var dropdown_pin = this.getTitleValue('PIN');
    Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
@@ -26,7 +172,7 @@ Blockly.Arduino.coolguy_airquality = function() {
    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-////声音传感器
+/*声音传感器*/
 Blockly.Arduino.coolguy_sensor_sound = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
@@ -36,7 +182,7 @@ Blockly.Arduino.coolguy_sensor_sound = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-///////红外测距传感器
+/*红外测距传感器*/
 Blockly.Arduino.coolguy_sensor_irranging = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
@@ -46,7 +192,7 @@ Blockly.Arduino.coolguy_sensor_irranging = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-//光敏传感器
+/*光敏传感器*/
 Blockly.Arduino.coolguy_sensor_photo = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
@@ -57,7 +203,7 @@ Blockly.Arduino.coolguy_sensor_photo = function() {
 };
 
 
-//按键传感器
+/*按键传感器*/
 Blockly.Arduino.coolguy_sensor_switch = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
@@ -67,7 +213,7 @@ Blockly.Arduino.coolguy_sensor_switch = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-//火焰传感器
+/*火焰传感器*/
 Blockly.Arduino.coolguy_sensor_fire = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
@@ -77,7 +223,7 @@ Blockly.Arduino.coolguy_sensor_fire = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-//震动传感器
+/*震动传感器*/
 Blockly.Arduino.coolguy_sensor_shock = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
@@ -87,7 +233,7 @@ Blockly.Arduino.coolguy_sensor_shock = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-//触摸开关
+/*触摸开关*/
 Blockly.Arduino.coolguy_sensor_touch = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
@@ -95,92 +241,45 @@ Blockly.Arduino.coolguy_sensor_touch = function() {
   Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
   var code = '!digitalRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
+};/*                    其他传感器模块结束                     */
 
-/////////////////////////////////循线模块/////////////////////////////////////////////////
-/////////////////////////////////循线模块/////////////////////////////////////////////////
-/////////////////////////////////循线模块/////////////////////////////////////////////////
-/////////////////////////////////循线模块/////////////////////////////////////////////////
-/////////////////////////////////循线模块/////////////////////////////////////////////////
-/////////////////////////////////循线模块/////////////////////////////////////////////////
-///////设置五灰度比较/////
-Blockly.Arduino.coolguy_line_set = function() {
-   var num1 = Blockly.Arduino.valueToCode(this, 'num1', Blockly.Arduino.ORDER_ATOMIC);//Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_NONE) || '0';
-   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
-   var num3 = Blockly.Arduino.valueToCode(this, 'num3',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
-   var num4 = Blockly.Arduino.valueToCode(this, 'num4',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
-   var num5 = Blockly.Arduino.valueToCode(this, 'num5',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+/*                       电机模块                             */
+/*左电机*/
+Blockly.Arduino.coolguy_motor_left = function() {
+   var num = Blockly.Arduino.valueToCode(this, 'num',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   if (num > 255)
+    {
+      num=255;
+    }
+   else if (num < -255)
+    {
+      num = -255;
+    }
+   else;
    Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   var code = 'CoolGuyModule_WalkLine::SetComparisonValue('+num1+','+num2+','+num3+','+num4+','+num5+');\n';
+    var code = 'CoolGuyModule_WalkLine:: LeftMotorSpeed ('+num+');\n';
     return code;
 };
-///////设置五灰度端口/////
-Blockly.Arduino.coolguy_line_port = function() {
-   var dropdown_pin = this.getTitleValue('PIN');
-   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   var code = 'CoolGuyModule_WalkLine::WalkLine_Init('+dropdown_pin+');\n';
-   return code;
-};
-//////转速？寻？路口后冲？秒///////coolguy_line1
-Blockly.Arduino.coolguy_line1 = function() {
-   var num1 = Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//转速
-   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//路口数
-   var num3 = Blockly.Arduino.valueToCode(this, 'num3',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//秒
-   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   var code = 'CoolGuyModule_WalkLine::RunWalkLine('+num2+','+num1+','+num3+');\n';
-  return code;
-};
 
-//////转速？循线？秒后停止coolguy_line2
-Blockly.Arduino.coolguy_line2 = function() {
-   var num1 = Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//转速
-   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//路口数
+/*右电机*/
+Blockly.Arduino.coolguy_motor_right = function() {
+   var speed_8bit = Blockly.Arduino.valueToCode(this, 'num',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   if (num > 255)
+    {
+      num = 255;
+    }
+   else if (num < -255)
+    {
+      num = -255;
+    } 
+   else;
    Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   var code = 'CoolGuyModule_WalkLine::RunWalkLine_Timer('+num1+','+num2+');\n';
-  return code;
-};
-//////转速？左转弯？线coolguy_line3    CoolGuyModule_WalkLine::RunWalkLine_Turn(int Direction,int MaxSpeed,int LineNum)
-Blockly.Arduino.coolguy_line3 = function() {
-   var num1 = Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//转速
-   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//几线
-   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   var code = 'CoolGuyModule_WalkLine::RunWalkLine_Turn(0,'+num1+','+num2+');\n';
+   var code = 'CoolGuyModule_WalkLine:: RightMotorSpeed (' + speed_8bit + ');\n';
    return code;
-};
-//////转速？右转弯？线coolguy_line4
-Blockly.Arduino.coolguy_line4 = function() {
-   var num1 = Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//转速
-   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';//几线
-   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   var code = 'CoolGuyModule_WalkLine::RunWalkLine_Turn(1,'+num1+','+num2+');\n';
-   return code;
-};
-//////读五灰度传感器？coolguy_line5
-Blockly.Arduino.coolguy_line5 = function() {
-   var dropdown_pin = this.getTitleValue('PIN');
-   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   var code = 'CoolGuyModule_WalkLine::GrayValue_ReadOne('+dropdown_pin+')';
-   return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
+};/*                       电机模块结束                             */
 
-/////////////////////LED与OLED模块///////////////////////////////////////////////////////////////////
-/////////////////////LED与OLED模块///////////////////////////////////////////////////////////////////
-/////////////////////LED与OLED模块///////////////////////////////////////////////////////////////////
-/////////////////////LED与OLED模块///////////////////////////////////////////////////////////////////
-/////////////////////LED与OLED模块///////////////////////////////////////////////////////////////////
-/////////////////////LED与OLED模块///////////////////////////////////////////////////////////////////
-/////////////////////LED与OLED模块///////////////////////////////////////////////////////////////////
-/////////////////////LED与OLED模块///////////////////////////////////////////////////////////////////
-/////LED灯
-Blockly.Arduino.coolguy_led = function() {
-  var dropdown_pin1 = this.getTitleValue('PIN1');
-  var dropdown_pin2 = this.getTitleValue('PIN2');
-  Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  Blockly.Arduino.setups_['setup_coolguy_ledmo'+dropdown_pin2]='pinMode('+dropdown_pin2+',OUTPUT);';
-  var code = 'digitalWrite('+dropdown_pin2+','+dropdown_pin1+');\n';
-  return code;
-};
-
+/*                      LED/OLED模块                        */
+/*oled显示英文字符串*/
 Blockly.Arduino.coolguy_oled_English = function() {
   var dropdown_pin1 = this.getTitleValue('PIN1');
   var dropdown_pin2 = this.getTitleValue('PIN2');
@@ -191,6 +290,7 @@ Blockly.Arduino.coolguy_oled_English = function() {
   return code;
 };
 
+/*oled显示数字*/
 Blockly.Arduino.coolguy_oled_number = function() {
   var dropdown_pin1 = this.getTitleValue('PIN1');
   var dropdown_pin2 = this.getTitleValue('PIN2');
@@ -201,12 +301,15 @@ Blockly.Arduino.coolguy_oled_number = function() {
   return code;
 };
 
-Blockly.Arduino.coolguy_oled3 = function() {
+/*oled清屏*/
+Blockly.Arduino.coolguy_oled_clear = function() {
   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
   Blockly.Arduino.definitions_['define_coolguy_oled1'] = 'CoolGuyModule_OLED OLED;';
   var code = 'OLED.OLED_CLS();\n';
   return code;
 };
+
+/*数码管显示数字*/
 Blockly.Arduino.coolguy_Nixietube = function() {
    var num = Blockly.Arduino.valueToCode(this, 'num',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
    var dropdown_pin = this.getTitleValue('PIN');
@@ -215,173 +318,51 @@ Blockly.Arduino.coolguy_Nixietube = function() {
    return code;
 };
 
-
-/////////////////////////////////超声波模块//////////////////////////////////////////////////////////
-/////////////////////////////////超声波模块//////////////////////////////////////////////////////////
-/////////////////////////////////超声波模块//////////////////////////////////////////////////////////
-/////////////////////////////////超声波模块//////////////////////////////////////////////////////////
-/////////////////////////////////超声波模块//////////////////////////////////////////////////////////
-//////超声波模块 
-/////读一体超声波距离（注：在五灰度已设置端口）
-Blockly.Arduino.coolguy_ultrasonic_already = function() {
-   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-  var code = 'CoolGuyModule_WalkLine::GetUltrasonicVal()';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-///////读扩展超声波距离在引脚COOLGUY_ANALOG_INPUT
-Blockly.Arduino.coolguy_ultrasonic_setup = function() {
-   var dropdown_pin = this.getTitleValue('PIN');
-   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-  var code = 'CoolGuyModule_Sensor:: Read_UltrasonicVal ('+dropdown_pin+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-////////////////////////////////红外遥控模块//////////////////////////////////////////////////////////////////////
-////////////////////////////////红外遥控模块//////////////////////////////////////////////////////////////////////
-////////////////////////////////红外遥控模块//////////////////////////////////////////////////////////////////////
-////////////////////////////////红外遥控模块//////////////////////////////////////////////////////////////////////
-////////////////////////////////红外遥控模块//////////////////////////////////////////////////////////////////////
-////////////////////////////////红外遥控模块//////////////////////////////////////////////////////////////////////
-////////////////////////////////红外遥控模块//////////////////////////////////////////////////////////////////////
-////红外遥控器 遥控通道1~8  ？键按下（上、下、左、右、上+B、下+B、左+B、右+B）引脚IO2IO3选择。
-Blockly.Arduino.coolguy_remotecontrol = function() {
+/*LED灯*/
+Blockly.Arduino.coolguy_led = function() {
   var dropdown_pin1 = this.getTitleValue('PIN1');
   var dropdown_pin2 = this.getTitleValue('PIN2');
-  var dropdown_pin3 = this.getTitleValue('PIN3');
-  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-  Blockly.Arduino.setups_['setup_coolguy_remotecontrol_'+dropdown_pin3]='CoolGuyModule_IR:: IR_Init('+dropdown_pin3+');';
-  var code = 'CoolGuyModule_IR::IR_KeyValueCmp('+dropdown_pin2+','+dropdown_pin1+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
+  Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
+  Blockly.Arduino.setups_['setup_coolguy_ledmo'+dropdown_pin2]='pinMode('+dropdown_pin2+',OUTPUT);';
+  var code = 'digitalWrite('+dropdown_pin2+','+dropdown_pin1+');\n';
+  return code;
+};/*                      LED/OLED模块结束                        */
 
-
-
-
-
-////////////////////////////////电机模块////////////////////////////////////////////////////////////////////
-////////////////////////////////电机模块////////////////////////////////////////////////////////////////////
-////////////////////////////////电机模块////////////////////////////////////////////////////////////////////
-////////////////////////////////电机模块////////////////////////////////////////////////////////////////////
-////////////////////////////////电机模块////////////////////////////////////////////////////////////////////
-////////////////////////////////电机模块////////////////////////////////////////////////////////////////////
-////////////////////////////////电机模块////////////////////////////////////////////////////////////////////
-/////左电机数字为int类型，若超过-256~255，只取低十六位////
-Blockly.Arduino.coolguy_motor_left = function() {
-   var num = Blockly.Arduino.valueToCode(this, 'num',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
-   if(num>255)num=255;
-   else if(num<-255)num=-255;
-   else;
-   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   //Blockly.Arduino.setups_['setup_coolguy_motor_left']='CoolGuyModule_WalkLine:: RightMotorSpeed ('+num+');';
-    var code = 'CoolGuyModule_WalkLine:: LeftMotorSpeed ('+num+');\n';
-    return code;
-};
-/////右电机数字为int类型，若超过-256~255，只取低十六位////
-Blockly.Arduino.coolguy_motor_right = function() {
-   var num = Blockly.Arduino.valueToCode(this, 'num',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
-   if(num>255)num=255;
-   else if(num<-255)num=-255;
-   else;
-   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   var code = 'CoolGuyModule_WalkLine:: RightMotorSpeed ('+num+');\n';
-   return code;
-};
-
-////////////////////////////////////////////////系统自带模块///////////////////////////////
-////////////////////////////////////////////////系统自带模块///////////////////////////////
-////////////////////////////////////////////////系统自带模块///////////////////////////////
-////////////////////////////////////////////////系统自带模块///////////////////////////////
-////////////////////////////////////////////////系统自带模块///////////////////////////////
-////////////////////////////////////////////////系统自带模块///////////////////////////////
-////////////////////////////////////////////////系统自带模块///////////////////////////////
-////////////////////////////////////////////////系统自带模块///////////////////////////////
-////////////////////////////////////////////////系统自带模块///////////////////////////////
-////////////////////////////////////////////////系统自带模块///////////////////////////////
-///////////////////读系统模拟接口//////////////////////////
+/*                      系统模块                             */
+/*读模拟引脚*/
 Blockly.Arduino.coolguy_analog_reading = function() {
    var dropdown_pin = this.getTitleValue('PIN');
-  var code = 'analogRead('+dropdown_pin+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-///////////////////读系统数字接口//////////////////////////
-Blockly.Arduino.coolguy_digital_reading = function() {
-   var dropdown_pin = this.getTitleValue('PIN');
-   Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-    Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
-  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
-   var code = '!digitalRead('+dropdown_pin+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+   var code = 'analogRead('+dropdown_pin+')';
+   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-///////////////////PWM//////////////////////
+/*读数字引脚*/
+Blockly.Arduino.coolguy_digital_reading = function() {
+    var dropdown_pin = this.getTitleValue('PIN');
+    Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
+    Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+    Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
+    var code = '!digitalRead('+dropdown_pin+')';
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/*设置PWM端口和输出*/
 Blockly.Arduino.coolguy_pwm = function() {
    var dropdown_pin = this.getTitleValue('PIN');
    var pwm_num = this.getTitleValue('PWM_NUM');
-    Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
+   Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
    var code = 'analogWrite('+dropdown_pin+','+pwm_num+');\n';
-    return code;
+   return code;
 };
-///////////////SERVO///////////////////////////servo_9.write(90)
-Blockly.Arduino.coolguy_servo = function() {
-   var dropdown_pin = this.getTitleValue('PIN');
-   var servo_num = this.getTitleValue('SERVO_NUM');
-    Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-    Blockly.Arduino.definitions_['define_"servo']='#include <Servo.h>';
-    Blockly.Arduino.setups_['setup_coolguy_servo'+dropdown_pin]='servo_'+dropdown_pin+'.attach('+dropdown_pin+');';
-   var code = 'servo_'+dropdown_pin+'.write('+servo_num+');\n';
-    return code;
-};
-// /////////////TIMER//////////////////////////millis()/1000.0
+
+/*计时器（毫秒为单位）*/
 Blockly.Arduino.coolguy_timer = function() {
-    Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
+  Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
   var code = 'millis()/1000.0';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-
-Blockly.Arduino.coolguy_serial1 = function() {
-  var str3 = Blockly.Arduino.valueToCode(this, 'TEXT3', Blockly.Arduino.ORDER_ATOMIC) || 'String(\"\")'
-  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-  var code = 'CoolGuyModule_StringCmp::SetString('+str3+');\n';
-  return code;
-};
-Blockly.Arduino.coolguy_serial2 = function() {
-  var str3 = Blockly.Arduino.valueToCode(this, 'TEXT3', Blockly.Arduino.ORDER_ATOMIC) || 'String(\"\")'
-  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-  Blockly.Arduino.setups_['setup_coolguy_serial2'] = 'Serial.setTimeout(100);\n';
-  var code = 'CoolGuyModule_StringCmp:: Compare_StringEqual('+str3+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-Blockly.Arduino.coolguy_serial3 = function() {
-  var str3 = Blockly.Arduino.valueToCode(this, 'TEXT3', Blockly.Arduino.ORDER_ATOMIC) || 'String(\"\")'
-  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-  Blockly.Arduino.setups_['setup_coolguy_serial2'] = 'Serial.setTimeout(100);\n';
-  var code = 'CoolGuyModule_StringCmp:: Compare_IncludeString ('+str3+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-Blockly.Arduino.coolguy_record_setup = function() {
-   var dropdown_pin = this.getTitleValue('PIN');
-   Blockly.Arduino.definitions_['define_"record'] = '#include <wtr050.h>';
-   Blockly.Arduino.definitions_['define_"record_setup'+dropdown_pin] = 'wtr050 wtr050_1('+dropdown_pin+');';
-   var code = '';
-   return code;
-};
-Blockly.Arduino.coolguy_record1 = function() {
-  Blockly.Arduino.definitions_['define_"record'] = '#include <wtr050.h>';
-  var code = 'wtr050_1.record_start();\n';
-  return code;
-};
-Blockly.Arduino.coolguy_record2 = function() {
-  Blockly.Arduino.definitions_['define_"record'] = '#include <wtr050.h>';
-  var code = 'wtr050_1.record_stop();\n';
-  return code;
-};
-Blockly.Arduino.coolguy_record3 = function() {
-  Blockly.Arduino.definitions_['define_"record'] = '#include <wtr050.h>';
-  var code = 'wtr050_1.play();\n';
-  return code;
-};
+/*部分数字端口设为输出*/
 Blockly.Arduino.coolguy_allportinitial = function() {
   Blockly.Arduino.setups_['setup_input_initial port2'] = 'pinMode(2, OUTPUT);';
   Blockly.Arduino.setups_['setup_input_initial port3'] = 'pinMode(3, OUTPUT);';
@@ -391,7 +372,4 @@ Blockly.Arduino.coolguy_allportinitial = function() {
   Blockly.Arduino.setups_['setup_input_initial port9'] = 'pinMode(9, OUTPUT);';
   var code = '';
   return code;
-};
-
-
-
+};/*                      系统模块结束                             */
