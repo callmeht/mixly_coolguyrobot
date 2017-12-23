@@ -297,7 +297,7 @@ Blockly.Blocks.coolguy_temp_get = {
     this.setColour(Blockly.Blocks.coolguyrobot.HUE);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_TEMP_SETUP)
-        .appendTitle(new Blockly.FieldDropdown(COOLGUY_ANALOG_INPUT), "PIN");
+        .appendTitle(new Blockly.FieldDropdown(COOLGUY_ALL_INPUT), "PIN");
     this.setInputsInline(true);
     this.setOutput(true, Number);
   }

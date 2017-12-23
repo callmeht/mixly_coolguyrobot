@@ -19,6 +19,8 @@ version:V1.1
 
 
 
+
+
 //********************红外模块************************
 int CoolGuyModule_IR::IRPin = 2;
 unsigned char	CoolGuyModule_IR::IRData[2] = {0,0};
@@ -727,11 +729,45 @@ void CoolGuyModule_WalkLine::LeftMotorSpeed(int s)
 
 
 //*******************传感器模块**********************
-//读取温度值
-float CoolGuyModule_Sensor::Read_Temperature(int pin)
+//读温度
+/*应用了OneWire库*/
+CoolGuyModule_Temperature_Read::CoolGuyModule_Temperature_Read(int pin)
+  :OneWire(pin)
 {
-	return analogRead(pin)*250.0/512-50;
+  
 }
+
+float CoolGuyModule_Temperature_Read::readT()
+{
+
+  byte data[12];
+  byte addr[8];
+ 
+  if ( !this->search(addr)) {
+    this->reset_search();
+    return -300; // if there is no sensor on OneWire Bus, return -300 value
+  }
+ 
+  this->reset();
+  this->select(addr);
+  this->write(0x44,1); // tell sensor to start converting
+  this->reset();
+  this->select(addr);
+  this->write(0xBE); // tell sensor to start sending data
+ 
+  for (int i = 0; i < 9; i++) { // we receive data in this loop
+    data[i] = this->read();
+  }
+ 
+  this->reset_search();
+ 
+  byte MSB = data[1];
+  byte LSB = data[0];
+ 
+  float raw = ((MSB << 8) | LSB); // move MSB left for 8 spaces, join that with LSB
+  float realTempC = raw / 16; // move decimal point left for 4 spaces, result our temperature
+  return realTempC;
+}//读温度 结束
 
 //读取PM2.5
 float CoolGuyModule_Sensor::Read_PM2_5(int pin)
@@ -1058,3 +1094,6 @@ bool CoolGuyModule_StringCmp::Compare_IncludeString(String str)
     
     return false;
 }
+
+
+

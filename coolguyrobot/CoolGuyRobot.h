@@ -6,6 +6,8 @@ version:V1.0
 #define CoolGuyRobot_h
 
 #include <Arduino.h>
+#include "OneWire.h"
+
 //#include <avr/io.h>  底层IO口寄存器操作库
 
 #define RIGHT 0x1
@@ -80,7 +82,7 @@ class CoolGuyModule_WalkLine
 		  
 		 	static void ReadSensor_Gray();
 		  
-		  static int ColorComparison_Buf1;
+		    static int ColorComparison_Buf1;
 			static int ColorComparison_Buf2;
 			static int ColorComparison_Buf3;
 			static int ColorComparison_Buf4;
@@ -106,13 +108,21 @@ class CoolGuyModule_WalkLine
 class CoolGuyModule_Sensor
 {
 	public:
-			static float Read_Temperature(int pin);
 			static float Read_PM2_5(int pin);
 			static float Read_UltrasonicVal(int pin);
 			
 	private:
 };
 
+//读温度
+/*应用了OneWire库*/
+class CoolGuyModule_Temperature_Read: public OneWire
+{
+	public:
+		CoolGuyModule_Temperature_Read(int pin);
+	    float readT();
+
+};//读温度 结束
 
 //********************OLED模块**********************
 class CoolGuyModule_OLED 
@@ -146,6 +156,10 @@ class CoolGuyModule_StringCmp
 
 
 };
+
+
+
+
 
 
 #endif

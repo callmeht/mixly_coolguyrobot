@@ -159,10 +159,17 @@ Blockly.Arduino.coolguy_record_play = function() {
 /*温度传感器模块*/
 Blockly.Arduino.coolguy_temp_get = function() {
    var dropdown_pin = this.getTitleValue('PIN');
+   // Blockly.Arduino.definitions_['define_"Wire.h'] = '#include <Wire.h>';
+   // Blockly.Arduino.definitions_['define_"OneWire.h'] = '#include <OneWire.h>';
+   Blockly.Arduino.definitions_['define_"CoolGuyModule_Temperature_Read ds' + dropdown_pin] = 'CoolGuyModule_Temperature_Read ds(' + dropdown_pin +');';
    Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   var code = 'CoolGuyModule_Sensor::Read_Temperature('+dropdown_pin+')';
+   //Blockly.Arduino.definitions_['float readT()'] = 'float readT(int pin){ OneWire ds(pin); byte data[12];  byte addr[8];   if ( !ds.search(addr)) {    ds.reset_search();    return -300;   }   ds.reset();  ds.select(addr);  ds.write(0x44,1);  ds.reset();  ds.select(addr);  ds.write(0xBE);    for (int i = 0; i < 9; i++) {     data[i] = ds.read();  }   ds.reset_search();   byte MSB = data[1];  byte LSB = data[0];   float raw = ((MSB << 8) | LSB);   float realTempC = raw / 16;   return realTempC;}';
+   var code = 'ds.readT()';
    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+
+
 
 /*空气质量检测模块*/
 Blockly.Arduino.coolguy_airquality = function() {
@@ -323,7 +330,8 @@ Blockly.Arduino.coolguy_led = function() {
   var dropdown_pin1 = this.getTitleValue('PIN1');
   var dropdown_pin2 = this.getTitleValue('PIN2');
   Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  Blockly.Arduino.setups_['setup_coolguy_ledmo'+dropdown_pin2]='pinMode('+dropdown_pin2+',OUTPUT);';
+  Blockly.Arduino.setups_['setup_input_'+dropdown_pin2]='pinMode('+dropdown_pin2+',OUTPUT);';
+  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin2] = 'digitalWrite('+dropdown_pin2+',HIGH);';
   var code = 'digitalWrite('+dropdown_pin2+','+dropdown_pin1+');\n';
   return code;
 };/*                      LED/OLED模块结束                        */

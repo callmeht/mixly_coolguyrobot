@@ -176,7 +176,7 @@
 					<shadow type="pins_analog"></shadow>
 				</value>
 			</block>	
-
+	
 	  		<block type="coolguy_airquality">
 	  			<value name="PIN">
 	  				<shadow type="pins_analog"></shadow>
