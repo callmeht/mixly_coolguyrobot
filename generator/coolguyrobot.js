@@ -270,7 +270,7 @@ Blockly.Arduino.coolguy_motor_left = function() {
 
 /*右电机*/
 Blockly.Arduino.coolguy_motor_right = function() {
-   var speed_8bit = Blockly.Arduino.valueToCode(this, 'num',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var num = Blockly.Arduino.valueToCode(this, 'num',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
    if (num > 255)
     {
       num = 255;
@@ -281,7 +281,7 @@ Blockly.Arduino.coolguy_motor_right = function() {
     } 
    else;
    Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
-   var code = 'CoolGuyModule_WalkLine:: RightMotorSpeed (' + speed_8bit + ');\n';
+   var code = 'CoolGuyModule_WalkLine:: RightMotorSpeed (' + num + ');\n';
    return code;
 };/*                       电机模块结束                             */
 
