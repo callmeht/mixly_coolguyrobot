@@ -87,3 +87,27 @@ Blockly.MIXLY_Nixietube="数码管显示";
 Blockly.MIXLY_PORT="端口";
 //20171119端口初始化，全部数字端口设置为输出
 Blockly.MIXLY_ALLPORTINITIAL="端口初始化  ";
+
+//20171227MU库封装
+Blockly.MIXLY_COOLGUY_MU_SETUP_START = "开始摄像头设置";
+Blockly.MIXLY_COOLGUY_MU_SETUP_START_TOOLTIP = "必须以“结束摄像头设置”结尾";
+Blockly.MIXLY_COOLGUY_MU_SETUP_STOP = "结束摄像头设置";
+Blockly.MIXLY_COOLGUY_MU_SETUP_STOP_TOOLTIP = "必须以“开始摄像头设置”开头";
+
+Blockly.MIXLY_COOLGUY_MU_SETUP_TYPE = "设置图像检测类型为 ";
+Blockly.MIXLY_COOLGUY_MU_SETUP_TYPE_TOOLTIP = "1、数值越高，检测准确性越高，检测速度变慢，漏报率增加。2、仅对人体检测和球体检测有效。3、默认值为1";
+Blockly.MIXLY_COOLGUY_MU_SETUP_LEVEL = "设置算法性能指标等级 ";
+Blockly.MIXLY_COOLGUY_MU_SETUP_LEVEL_TOOLTIP = "1、数值越高，可以检测到更远的物体，但水平视野宽度会变窄。2、当设置为人脸检测时，会自动将ZOOM设置为3。3、默认值为1";
+Blockly.MIXLY_COOLGUY_MU_SETUP_ZOOM = "设置摄像头视野范围等级 ";
+Blockly.MIXLY_COOLGUY_MU_SETUP_OUTPUT = "设置传感器数据输出模式为";
+
+Blockly.MIXLY_COOLGUY_MU_DATA_READ = "读取摄像头数据";
+
+Blockly.MIXLY_COOLGUY_MU_DATAVALID = "读取数据正确";
+Blockly.MIXLY_COOLGUY_MU_DECTED = "摄像头检测到对象";
+Blockly.MIXLY_COOLGUY_MU_GETX = "读取对象x轴坐标";
+Blockly.MIXLY_COOLGUY_MU_GETY = "读取对象y轴坐标";
+Blockly.MIXLY_COOLGUY_MU_GETWIDTH = "读取对象宽度";
+Blockly.MIXLY_COOLGUY_MU_GETHEIGHT = "读取对象高度";
+
+

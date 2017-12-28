@@ -6,6 +6,9 @@ goog.require('Blockly.Blocks');
 
 
 Blockly.Blocks.coolguyrobot.HUE = 20;
+var coolguyrobot_read_digital= 100;
+var coolguyrobot_read_analog= 200;
+Blockly.Blocks.coolguyrobot.HUE2 = 120;
 
 var COOLGUY_MS=[["M1", "1"],["M2", "2"]];
 var COOLGUY_OLEDROW=[["1","1"],["2","2"],["3","3"],["4","4"]];
@@ -185,7 +188,7 @@ Blockly.Blocks.coolguy_line_turnright =  {
 var COOLGUY_LINE_SENSOR=[["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]];
 Blockly.Blocks.coolguy_line_sensorchoose =  {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_analog);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_LINE5)
         .appendTitle(new Blockly.FieldDropdown(COOLGUY_LINE_SENSOR), "PIN");
@@ -198,7 +201,7 @@ Blockly.Blocks.coolguy_line_sensorchoose =  {
 /*一体超声波 置于五灰度传感器上 无需设置端口*/
 Blockly.Blocks.coolguy_ultrasonic_already = {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_analog);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_ULTRASONIC_ALREAGY);
     this.setInputsInline(true);
@@ -209,7 +212,7 @@ Blockly.Blocks.coolguy_ultrasonic_already = {
 /*读扩展超声波距离*/
 Blockly.Blocks.coolguy_ultrasonic_setup = {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_analog);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_ULTRASONIC_SETUP)
         .appendTitle(new Blockly.FieldDropdown(COOLGUY_ANALOG_INPUT), "PIN");
@@ -294,7 +297,7 @@ Blockly.Blocks.coolguy_record_play = {
 /*温度传感器模块*/
 Blockly.Blocks.coolguy_temp_get = {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_analog);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_TEMP_SETUP)
         .appendTitle(new Blockly.FieldDropdown(COOLGUY_ALL_INPUT), "PIN");
@@ -308,7 +311,7 @@ Blockly.Blocks.coolguy_temp_get = {
 Blockly.Blocks.coolguy_airquality = {
   init: function() {
     //this.setColour(COLOR_AIR);
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_analog);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_AIRQUALITY)
         .appendTitle(new Blockly.FieldDropdown(COOLGUY_ANALOG_INPUT), "PIN");
@@ -320,7 +323,7 @@ Blockly.Blocks.coolguy_airquality = {
 /*声音传感器*/
 Blockly.Blocks.coolguy_sensor_sound = {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_digital);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_PIN);
     this.appendDummyInput("")
@@ -337,7 +340,7 @@ Blockly.Blocks.coolguy_sensor_sound = {
 /*红外测距传感器*/
 Blockly.Blocks.coolguy_sensor_irranging = {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_digital);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_PIN);
     this.appendDummyInput("")
@@ -351,7 +354,7 @@ Blockly.Blocks.coolguy_sensor_irranging = {
 /*光敏传感器*/
 Blockly.Blocks.coolguy_sensor_photo = {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_digital);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_PIN);
     this.appendDummyInput("")
@@ -365,7 +368,7 @@ Blockly.Blocks.coolguy_sensor_photo = {
 /*按键传感器*/
 Blockly.Blocks.coolguy_sensor_switch = {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_digital);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_PIN);
     this.appendDummyInput("")
@@ -379,7 +382,7 @@ Blockly.Blocks.coolguy_sensor_switch = {
 /*火焰传感器*/
 Blockly.Blocks.coolguy_sensor_fire = {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_digital);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_PIN);
     this.appendDummyInput("")
@@ -393,7 +396,7 @@ Blockly.Blocks.coolguy_sensor_fire = {
 /*震动传感器*/
 Blockly.Blocks.coolguy_sensor_shock = {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_digital);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_PIN);
     this.appendDummyInput("")
@@ -407,7 +410,7 @@ Blockly.Blocks.coolguy_sensor_shock = {
 /*触摸开关*/
 Blockly.Blocks.coolguy_sensor_touch = {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.setColour(coolguyrobot_read_digital);
     this.appendDummyInput("")
         .appendTitle(Blockly.MIXLY_COOLGUY_PIN);
     this.appendDummyInput("")
@@ -601,3 +604,159 @@ Blockly.Blocks.coolguy_allportinitial = {
     this.setNextStatement(true, null);
   }
 };/*                      系统模块结束                             */
+
+//********************人工智能***********************
+//************* MU摄像头模块***************
+Blockly.Blocks.coolguy_mu_setup_start =  {
+  init: function() {
+    this.setColour(Blockly.Blocks.coolguyrobot.HUE2);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_START);   
+    // this.appendStatementInput('DO')
+    //     .appendField('');
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.MIXLY_COOLGUY_MU_SETUP_START_TOOLTIP);
+  }
+};
+
+Blockly.Blocks.coolguy_mu_setup_stop =  {
+  init: function() {
+    this.setColour(Blockly.Blocks.coolguyrobot.HUE2);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_STOP);
+        //.appendTitle(new Blockly.FieldDropdown(COOLGUY_ANALOG_INPUT), "PIN");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.MIXLY_COOLGUY_MU_SETUP_STOP_TOOLTIP);
+  }
+};
+
+var COOLGUY_MU_TYPE=[["人体检测", "BODY"],["球体检测", "BALL"],["人脸检测", "FACE"],["线条检测", "LINE"],["移动物体检测", "MOVINGOBJECT"]];
+Blockly.Blocks.coolguy_mu_setup_type = {
+  init: function() {
+    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_TYPE)
+        .appendTitle(new Blockly.FieldDropdown(COOLGUY_MU_TYPE), "PIN1");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+var COOLGUY_MU_LEVEL=[["1", "1"],["2", "2"],["3", "3"],["4", "4"],["5", "5"]];
+Blockly.Blocks.coolguy_mu_setup_level = {
+  init: function() {
+    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_LEVEL)
+        .appendTitle(new Blockly.FieldDropdown(COOLGUY_MU_LEVEL), "PIN1");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.MIXLY_COOLGUY_MU_SETUP_TYPE_TOOLTIP);
+  }
+};
+
+var COOLGUY_MU_ZOOM=[["1", "1"],["2", "2"],["3", "3"],["4", "4"],["5", "5"]];
+Blockly.Blocks.coolguy_mu_setup_zoom = {
+  init: function() {
+    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_ZOOM)
+        .appendTitle(new Blockly.FieldDropdown(COOLGUY_MU_ZOOM), "PIN1");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.MIXLY_COOLGUY_MU_SETUP_LEVEL_TOOLTIP);
+  }
+};
+
+var COOLGUY_MU_OUTPUT=[["连续模式", "DATAFLOW"],["读取模式", "CALLBACK"]];
+Blockly.Blocks.coolguy_mu_setup_output = {
+  init: function() {
+    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_OUTPUT)
+        .appendTitle(new Blockly.FieldDropdown(COOLGUY_MU_OUTPUT), "PIN1");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks.coolguy_mu_data_read = {
+  init: function() {
+    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_DATA_READ);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks.coolguy_mu_datavalid = {
+  init: function() {
+    this.setColour(coolguyrobot_read_digital);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_DATAVALID);
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+  }
+};
+
+Blockly.Blocks.coolguy_mu_detected = {
+  init: function() {
+    this.setColour(coolguyrobot_read_digital);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_DECTED);
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+  }
+};
+
+
+Blockly.Blocks.coolguy_mu_getx = {
+  init: function() {
+    this.setColour(coolguyrobot_read_analog);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_GETX);
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+  }
+};
+
+Blockly.Blocks.coolguy_mu_gety = {
+  init: function() {
+    this.setColour(coolguyrobot_read_analog);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_GETY);
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+  }
+};
+
+Blockly.Blocks.coolguy_mu_getwidth = {
+  init: function() {
+    this.setColour(coolguyrobot_read_analog);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_GETWIDTH);
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+  }
+};
+
+Blockly.Blocks.coolguy_mu_getheight = {
+  init: function() {
+    this.setColour(coolguyrobot_read_analog);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_MU_GETHEIGHT);
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+  }
+};
+
