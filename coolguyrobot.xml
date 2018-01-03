@@ -8,13 +8,11 @@
 	<script type="text/javascript" src="../../blocks/company/coolguyrobot.js"></script>
 	<script type="text/javascript" src="../../generators/arduino/company/coolguyrobot.js"></script>
 
-<category id="catCOOLGUYROBOT_1" name="酷哥机器人">
+<category id="catCOOLGUYROBOT_1" name="酷哥机器人" colour="100">
 	<!-- 人工智能-->
-		<category id="catCOOLGUYROBOT_3" name="人工智能" colour="20">
+		<category id="catCOOLGUYROBOT_3" name="人工智能" colour="150">
 		<!-- MU摄像头模块 -->
-			<category id="catCOOLGUYROBOT_3" name="MU摄像头模块" colour="60">
-
-					<block type="coolguy_mu_setup_start"></block>
+			<category id="catCOOLGUYROBOT_3" name="摄像头模块" colour="200">
 
 					<block type="coolguy_mu_setup_type">
 						<value name="PIN1">
@@ -24,49 +22,13 @@
 						</value>
 					</block>
 
-					<block type="coolguy_mu_setup_level">
-						<value name="PIN1">
-							<block type="text">  
-								<field name="PIN1"></field>
-							</block>
-						</value>
-					</block>
-
-					<block type="coolguy_mu_setup_zoom">
-						<value name="PIN1">
-							<block type="text">
-								<field name="PIN1"></field>
-							</block>
-						</value>
-					</block>
-
-					<block type="coolguy_mu_setup_output">
-						<value name="PIN1">
-							<block type="text">
-								<field name="PIN1"></field>
-							</block>
-						</value>
-					</block>
-
-					<block type="coolguy_mu_setup_stop"></block>
-
 					<block type="coolguy_mu_data_read"></block>
-					
-			  		<block type="coolguy_mu_datavalid"></block>
 
 			  		<block type="coolguy_mu_detected"></block>
 
-					<block type="coolguy_mu_getx"></block>	
-
-					<block type="coolguy_mu_gety"></block>	
-
-					<block type="coolguy_mu_getwidth"></block>	
-
-					<block type="coolguy_mu_getheight"></block>	
-
 			</category>	
 
-			<category id="catCOOLGUYROBOT_3" name="语音模块" colour="60">
+			<category id="catCOOLGUYROBOT_3" name="语音模块" colour="200">
 
 				<block type="coolguy_record_portsetup"></block>
 
@@ -82,7 +44,7 @@
 
 
 	<!-- 其他串口模块 -->
-		<category id="catCOOLGUYROBOT_3" name="其他串口模块" colour="20">
+		<category id="catCOOLGUYROBOT_3" name="其他串口模块" colour="200">
 
 			<block type="coolguy_serial_content_set">
 				<value name="TEXT3">
@@ -111,7 +73,7 @@
 		</category>	<!--其他串口模块结束  -->
 	
 	<!-- 循线模块 -->
-		<category id="catCOOLGUYROBOT_3" name="循线模块" colour="20">
+		<category id="catCOOLGUYROBOT_3" name="循线模块" colour="200">
 
 		    <block type="coolguy_line_cmp_valueset">
 		    	<value name="num1">
@@ -205,7 +167,7 @@
 		</category>	<!-- 循线模块结束 -->
 
 	<!-- 超声波模块 -->
-		<category id="catCOOLGUYROBOT_3" name="超声波模块" colour="20">
+		<category id="catCOOLGUYROBOT_3" name="超声波模块" colour="200">
 
 			<block type="coolguy_ultrasonic_already">
 				<value name="PIN">
@@ -222,18 +184,20 @@
 		</category>	<!-- 超声波模块结束 -->
 
 	<!-- 红外遥控模块 -->		
-		<category id="catCOOLGUYROBOT_3" name="红外遥控模块" colour="20">
+		<category id="catCOOLGUYROBOT_3" name="红外遥控模块" colour="200">
 
 			<block type="coolguy_remotecontrol">
 				<value name="PIN1">
 					<block type="text">
 						<field name="PIN1"></field>
 					</block>
+				</value>
+	  		</block>
 
 		</category>	<!-- 红外遥控模块结束 -->	
 
 	<!-- 其他传感器模块 -->	
-		<category id="catCOOLGUYROBOT_3" name="其他传感器模块" colour="20">
+		<category id="catCOOLGUYROBOT_3" name="其他传感器模块" colour="200">
 
 			<block type="coolguy_temp_get">
 				<value name="PIN">
@@ -292,7 +256,7 @@
 		</category>	<!-- 其他传感器模块结束 -->	
 
      <!-- 电机模块 -->	
-		<category id="catCOOLGUYROBOT_3" name="电机模块" colour="20">
+		<category id="catCOOLGUYROBOT_3" name="电机模块" colour="200">
 
 		    <block type="coolguy_motor_left">
 		    	<value name="num">
@@ -313,7 +277,7 @@
 		</category>	<!-- 电机模块结束 -->	
 
      <!-- LED/OLED模块 -->			
-		<category id="catCOOLGUYROBOT_3" name="LED/OLED模块" colour="20">
+		<category id="catCOOLGUYROBOT_3" name="LED/OLED模块" colour="200">
 			
 			<block type="coolguy_oled_English">
 				<value name="TEXT3">
@@ -350,7 +314,7 @@
 		</category>	<!-- LED/OLED模块结束 -->	
 
      <!-- 系统模块 -->	
-			<category id="catCOOLGUYROBOT_2" name="系统模块" colour="20">
+			<category id="catCOOLGUYROBOT_2" name="系统模块" colour="200">
 
 			  		<block type="coolguy_analog_reading"></block>
 
@@ -360,7 +324,7 @@
 
 		  		    <block type="coolguy_timer"></block>	
 
-			        <block type="coolguy_allportinitial"></block>
+			        <!-- <block type="coolguy_allportinitial"></block> -->
 
 		    </category>	 <!-- 系统模块结束 -->	
 

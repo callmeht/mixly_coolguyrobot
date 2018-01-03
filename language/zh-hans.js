@@ -89,10 +89,8 @@ Blockly.MIXLY_PORT="端口";
 Blockly.MIXLY_ALLPORTINITIAL="端口初始化  ";
 
 //20171227MU库封装
-Blockly.MIXLY_COOLGUY_MU_SETUP_START = "开始摄像头设置";
-Blockly.MIXLY_COOLGUY_MU_SETUP_START_TOOLTIP = "必须以“结束摄像头设置”结尾";
-Blockly.MIXLY_COOLGUY_MU_SETUP_STOP = "结束摄像头设置";
-Blockly.MIXLY_COOLGUY_MU_SETUP_STOP_TOOLTIP = "必须以“开始摄像头设置”开头";
+Blockly.MIXLY_COOLGUY_MU_SETUP_START = "**********开始摄像头设置**********";
+Blockly.MIXLY_COOLGUY_MU_SETUP_STOP = "**********结束摄像头设置**********";
 
 Blockly.MIXLY_COOLGUY_MU_SETUP_TYPE = "设置图像检测类型为 ";
 Blockly.MIXLY_COOLGUY_MU_SETUP_TYPE_TOOLTIP = "1、数值越高，检测准确性越高，检测速度变慢，漏报率增加。2、仅对人体检测和球体检测有效。3、默认值为1";
