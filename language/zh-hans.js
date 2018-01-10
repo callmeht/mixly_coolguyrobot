@@ -33,7 +33,8 @@ Blockly.MIXLY_COOLGUY_REMOTECONTROL_KEY="键按下";
 Blockly.MIXLY_COOLGUY_LEDMO="LED灯  引脚";
 Blockly.MIXLY_COOLGUY_ULTRASONIC_ALREAGY="读一体超声波距离";
 Blockly.MIXLY_COOLGUY_ULTRASONIC_SETUP="读扩展超声波距离在引脚";
-Blockly.MIXLY_COOLGUY_TEMP_SETUP="读温度值在引脚";
+Blockly.MIXLY_COOLGUY_TEMP_SETUP_AIR="读环境温度值在引脚";
+Blockly.MIXLY_COOLGUY_TEMP_SETUP_LIQ="读温度探头在引脚";
 Blockly.MIXLY_COOLGUY_AIRQUALITY="读空气质量在引脚";
 
 Blockly.MIXLY_COOLGUY_MOTOR_LEFT="左电机转速";
@@ -107,5 +108,22 @@ Blockly.MIXLY_COOLGUY_MU_GETX = "读取对象x轴坐标";
 Blockly.MIXLY_COOLGUY_MU_GETY = "读取对象y轴坐标";
 Blockly.MIXLY_COOLGUY_MU_GETWIDTH = "读取对象宽度";
 Blockly.MIXLY_COOLGUY_MU_GETHEIGHT = "读取对象高度";
+
+//**************RTC******************
+Blockly.MIXLY_COOLGUY_RTC_READ = "读取RTC时钟";
+Blockly.MIXLY_COOLGUY_RTC_SET = "设置RTC时钟为 ";
+Blockly.MIXLY_COOLGUY_RTC_SET_YEAR = "年 ";
+Blockly.MIXLY_COOLGUY_RTC_SET_MONTH = "月";
+Blockly.MIXLY_COOLGUY_RTC_SET_DATE = "日";
+Blockly.MIXLY_COOLGUY_RTC_SET_HOUR = " 时";
+Blockly.MIXLY_COOLGUY_RTC_SET_MINUTE = "分";
+Blockly.MIXLY_COOLGUY_RTC_SET_SECOND = "秒";
+
+//*************三轴加速度及电子罗盘********************
+
+Blockly.MIXLY_COOLGUY_THREEAXIS_READ = "读取";
+Blockly.MIXLY_COOLGUY_THREEAXIS_AXIS = "轴加速度";
+Blockly.MIXLY_COOLGUY_THREEAXIS_H = "读取电子罗盘角度";
+
 
 

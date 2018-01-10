@@ -1,30 +1,30 @@
 /*********************************************************************
-å¾® é›ª ç”µ å­   WaveShare   http://www.waveShare.net            
-ç›®    çš„:   å»ºç«‹I2Cæ“ä½œåº“
-ç›®æ ‡ç³»ç»Ÿ:   åŸºäºŽAVRå•ç‰‡æœº                                                 
-åº”ç”¨è½¯ä»¶:   ICCAVR                                                      
-ç‰ˆ    æœ¬:   Version 1.0                                                       
-åœ†ç‰ˆæ—¶é—´:   2005-06-25
-å¼€å‘äººå‘˜:   SEE
-è¯´    æ˜Ž:   è‹¥ç”¨äºŽå•†ä¸šç”¨é€”ï¼Œè¯·ä¿ç•™æ­¤æ®µæ–‡å­—æˆ–æ³¨æ˜Žä»£ç æ¥æº
-   æ·± åœ³ å¸‚ å¾® é›ª ç”µ å­ æœ‰ é™ å…¬ å¸ ä¿ ç•™ æ‰€ æœ‰ çš„ ç‰ˆ æƒ     
+Î¢ Ñ© µç ×Ó   WaveShare   http://www.waveShare.net            
+Ä¿    µÄ:   ½¨Á¢I2C²Ù×÷¿â
+Ä¿±êÏµÍ³:   »ùÓÚAVRµ¥Æ¬»ú                                                 
+Ó¦ÓÃÈí¼þ:   ICCAVR                                                      
+°æ    ±¾:   Version 1.0                                                       
+Ô²°æÊ±¼ä:   2005-06-25
+¿ª·¢ÈËÔ±:   SEE
+Ëµ    Ã÷:   ÈôÓÃÓÚÉÌÒµÓÃÍ¾£¬Çë±£Áô´Ë¶ÎÎÄ×Ö»ò×¢Ã÷´úÂëÀ´Ô´
+   Éî ÛÚ ÊÐ Î¢ Ñ© µç ×Ó ÓÐ ÏÞ ¹« Ë¾ ±£ Áô Ëù ÓÐ µÄ °æ È¨     
 *********************************************************************/ 
 
 /*01010101010101010101010101010101010101010101010101010101010101010101
 ----------------------------------------------------------------------
-ç‰ˆæœ¬æ›´æ–°è®°å½•ï¼š
+°æ±¾¸üÐÂ¼ÇÂ¼£º
 
 ----------------------------------------------------------------------
-å…¥å£å‚æ•°è¯´æ˜Žï¼š
+Èë¿Ú²ÎÊýËµÃ÷£º
 
 ----------------------------------------------------------------------
-å¾…å®šå‚æ•°è¯´æ˜Žï¼š
+´ý¶¨²ÎÊýËµÃ÷£º
 
 ---------------------------------------------------------------------- 
-å¯¹å¤–å˜é‡è¯´æ˜Žï¼š
+¶ÔÍâ±äÁ¿ËµÃ÷£º
 
 ----------------------------------------------------------------------
-å¯¹å¤–ç¨‹åºè¯´æ˜Žï¼š
+¶ÔÍâ³ÌÐòËµÃ÷£º
 
 ----------------------------------------------------------------------
 10101010101010101010101010101010101010101010101010101010101010101010*/
@@ -113,18 +113,18 @@ void I2C_init(void)
 {
    TWCR = 1<<TWEN;
    //TWBR = 0x3;
-   TWBR = 0x10;	//åˆ†é¢‘æ•°  è¶Šå¤§IICé€Ÿåº¦è¶Šæ…¢ ä¹Ÿå°±å‡ºé”™çŽ‡è¶Šä½Ž
+   TWBR = 0x10;	//·ÖÆµÊý  Ô½´óIICËÙ¶ÈÔ½Âý Ò²¾Í³ö´íÂÊÔ½µÍ
    TWSR = 0;
 }
 
 
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C Start
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼š
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C Start
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£º
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_Start(void)     
 {
@@ -135,12 +135,12 @@ if( I2CChkAck()!=I2C_START )
 return I2C_CRR;
 }
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C ReStart
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼š
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C ReStart
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£º
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_Restart(void)     
 {
@@ -151,78 +151,78 @@ if( I2CChkAck()!=I2C_RESTART )
 return I2C_CRR;
 }
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C(TWI)å‘é€ 7ä½ å™¨ä»¶å†™åœ°å€: XXXX XXX0
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼š
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C(TWI)·¢ËÍ 7Î» Æ÷¼þÐ´µØÖ·: XXXX XXX0
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£º
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_SendWrDAdr(uchar wrDAdr) 
 {
-I2CSendByte(wrDAdr);    //è®¾ç½® å™¨ä»¶å†™åœ°å€
+I2CSendByte(wrDAdr);    //ÉèÖÃ Æ÷¼þÐ´µØÖ·
 I2CWaitAck();
 if( I2CChkAck()!=I2C_MT_SLA_ACK ) 
    return I2C_ERR;
 return I2C_CRR;  
 }
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C(TWI)å‘é€ 10ä½ å™¨ä»¶å†™åœ°å€: 1111 0XX0, XXXX XXXX
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼šå…¼å®¹ å‘é€ 7ä½ å™¨ä»¶å†™åœ°å€: XXXX XXX0
-è¾“    å…¥ï¼š
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C(TWI)·¢ËÍ 10Î» Æ÷¼þÐ´µØÖ·: 1111 0XX0, XXXX XXXX
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º¼æÈÝ ·¢ËÍ 7Î» Æ÷¼þÐ´µØÖ·: XXXX XXX0
+Êä    Èë£º
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_SendWrDAdr_(uint wrDAdr) 
 {
-if( wrDAdr&0xF000 == 0xF000 ) //åˆ¤æ–­æ˜¯å¦ä¸º 10ä½ å™¨ä»¶åœ°å€
-   if( I2C_SendWrDAdr( (uchar)wrDAdr>>8 )==I2C_ERR ) //è®¾ç½® ï¼ˆé«˜ä½ï¼‰å™¨ä»¶å†™åœ°å€
+if( wrDAdr&0xF000 == 0xF000 ) //ÅÐ¶ÏÊÇ·ñÎª 10Î» Æ÷¼þµØÖ·
+   if( I2C_SendWrDAdr( (uchar)wrDAdr>>8 )==I2C_ERR ) //ÉèÖÃ £¨¸ßÎ»£©Æ÷¼þÐ´µØÖ·
     return I2C_ERR;
-if( I2C_SendWrDAdr( (uchar)wrDAdr )==I2C_ERR ) //è®¾ç½® ï¼ˆä½Žä½ï¼‰å™¨ä»¶å†™åœ°å€
+if( I2C_SendWrDAdr( (uchar)wrDAdr )==I2C_ERR ) //ÉèÖÃ £¨µÍÎ»£©Æ÷¼þÐ´µØÖ·
    return I2C_ERR;
 return I2C_CRR;
 }
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C(TWI)å‘é€ 7ä½ å™¨ä»¶è¯»åœ°å€: XXXX XXX1
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼š
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C(TWI)·¢ËÍ 7Î» Æ÷¼þ¶ÁµØÖ·: XXXX XXX1
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£º
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_SendRdDAdr(uchar rdDAdr) 
 {
-I2CSendByte(rdDAdr);    //è®¾ç½® å™¨ä»¶è¯»åœ°å€
+I2CSendByte(rdDAdr);    //ÉèÖÃ Æ÷¼þ¶ÁµØÖ·
 I2CWaitAck();
 if( I2CChkAck()!=I2C_MR_SLA_ACK ) 
    return I2C_ERR;
 return I2C_CRR; 
 }
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C(TWI)å‘é€ 10ä½ å™¨ä»¶è¯»åœ°å€: 1111 0XX0, XXXX XXXX
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼š
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C(TWI)·¢ËÍ 10Î» Æ÷¼þ¶ÁµØÖ·: 1111 0XX0, XXXX XXXX
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£º
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_SendRdDAdr_(uchar rdDAdr) 
 {
-if( rdDAdr&0xF000 == 0xF000 ) //åˆ¤æ–­æ˜¯å¦ä¸º 10ä½ å™¨ä»¶åœ°å€
-   if( I2C_SendWrDAdr( (uchar)rdDAdr>>8 )==I2C_ERR ) //è®¾ç½® ï¼ˆé«˜ä½ï¼‰å™¨ä»¶è¯»åœ°å€
+if( rdDAdr&0xF000 == 0xF000 ) //ÅÐ¶ÏÊÇ·ñÎª 10Î» Æ÷¼þµØÖ·
+   if( I2C_SendWrDAdr( (uchar)rdDAdr>>8 )==I2C_ERR ) //ÉèÖÃ £¨¸ßÎ»£©Æ÷¼þ¶ÁµØÖ·
     return I2C_ERR;
-if( I2C_SendWrDAdr( (uchar)rdDAdr )==I2C_ERR ) //è®¾ç½® ï¼ˆä½Žä½ï¼‰å™¨ä»¶è¯»åœ°å€
+if( I2C_SendWrDAdr( (uchar)rdDAdr )==I2C_ERR ) //ÉèÖÃ £¨µÍÎ»£©Æ÷¼þ¶ÁµØÖ·
    return I2C_ERR;
 return I2C_CRR;
 }
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C(TWI)å‘é€æ•°æ®
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼š
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C(TWI)·¢ËÍÊý¾Ý
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£º
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_SendDat(uchar configDat) 
 {
@@ -233,12 +233,12 @@ if( I2CChkAck()!=I2C_MT_DATA_ACK )
 return I2C_CRR; 
 }
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C(TWI)æŽ¥æ”¶æ•°æ®ä¸”ä¸äº§ç”Ÿåº”ç­”
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼š
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C(TWI)½ÓÊÕÊý¾ÝÇÒ²»²úÉúÓ¦´ð
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£º
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_RcvNAckDat(uchar *pRdDat) 
 {
@@ -250,12 +250,12 @@ if( I2CChkAck()!=I2C_MR_DATA_NACK )
 return I2C_CRR;
 }
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C(TWI)æŽ¥æ”¶æ•°æ®ä¸”äº§ç”Ÿåº”ç­”
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼š
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C(TWI)½ÓÊÕÊý¾ÝÇÒ²úÉúÓ¦´ð
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£º
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_RcvAckDat(uchar *pRdDat) 
 {
@@ -267,14 +267,14 @@ if( I2CChkAck()!=I2C_MR_DATA_ACK )
 return I2C_CRR;
 }
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C(TWI)å†™å™¨ä»¶ï¼Œå†™ä¸€ä¸ªæ•°æ®
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼šwrDAdr: write device-address å†™å™¨ä»¶åœ°å€
-   wordAdr: word address å­—åœ°å€
-   dat: data æ•°æ®
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C(TWI)Ð´Æ÷¼þ£¬Ð´Ò»¸öÊý¾Ý
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£ºwrDAdr: write device-address Ð´Æ÷¼þµØÖ·
+   wordAdr: word address ×ÖµØÖ·
+   dat: data Êý¾Ý
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_Write(uint wrDAdr,uchar wordAdr,uchar dat)
 {
@@ -295,15 +295,15 @@ I2C_Stop();
 return I2C_CRR;
 }
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C(TWI)å†™å™¨ä»¶ï¼Œå†™Nä¸ªæ•°æ®
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼šwrDAdr: write device-address å†™å™¨ä»¶åœ°å€
-   wordAdr: word address å­—åœ°å€
-   *pWrDat: p->write data å†™å…¥æ•°æ®æŒ‡é’ˆ
-   num: number å†™å…¥æ•°æ®ä¸ªæ•°
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C(TWI)Ð´Æ÷¼þ£¬Ð´N¸öÊý¾Ý
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£ºwrDAdr: write device-address Ð´Æ÷¼þµØÖ·
+   wordAdr: word address ×ÖµØÖ·
+   *pWrDat: p->write data Ð´ÈëÊý¾ÝÖ¸Õë
+   num: number Ð´ÈëÊý¾Ý¸öÊý
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 //bool I2C_Write_(uint16 wrDAdr,uint8 wordAdr,
 //      uint8 *pWrDat,uint8 num)
@@ -311,15 +311,15 @@ return I2C_CRR;
 //
 //} 
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C(TWI)è¯»å™¨ä»¶ï¼Œè¯»ä¸€ä¸ªæ•°æ®
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼šwrDAdr: write device-address å†™å™¨ä»¶åœ°å€
-   wordAdr: word address å­—åœ°å€
-   rdDAdr: read device-address è¯»å™¨ä»¶åœ°å€
-   *pRdDat: p->read data è¯»å–æ•°æ®æŒ‡é’ˆ
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C(TWI)¶ÁÆ÷¼þ£¬¶ÁÒ»¸öÊý¾Ý
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£ºwrDAdr: write device-address Ð´Æ÷¼þµØÖ·
+   wordAdr: word address ×ÖµØÖ·
+   rdDAdr: read device-address ¶ÁÆ÷¼þµØÖ·
+   *pRdDat: p->read data ¶ÁÈ¡Êý¾ÝÖ¸Õë
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_Read(uint wrDAdr,uchar wordAdr,
      uchar rdDAdr,uchar *pRdDat)
@@ -347,16 +347,16 @@ I2C_Stop();
 return I2C_CRR;
 }
 /*--------------------------------------------------------------------
-ç¨‹åºåç§°ï¼šI2C(TWI)è¯»å™¨ä»¶ï¼Œè¯»Nä¸ªæ•°æ®
-ç¨‹åºåŠŸèƒ½ï¼š
-æ³¨æ„äº‹é¡¹ï¼š
-æç¤ºè¯´æ˜Žï¼š
-è¾“    å…¥ï¼šwrDAdr: write device-address å†™å™¨ä»¶åœ°å€
-   wordAdr: word address å­—åœ°å€
-   rdDAdr: read device-address è¯»å™¨ä»¶åœ°å€
-   *pRdDat: p->read data è¯»å–æ•°æ®æŒ‡é’ˆ
-   num: number è¯»å–æ•°æ®ä¸ªæ•°
-è¿”    å›žï¼š
+³ÌÐòÃû³Æ£ºI2C(TWI)¶ÁÆ÷¼þ£¬¶ÁN¸öÊý¾Ý
+³ÌÐò¹¦ÄÜ£º
+×¢ÒâÊÂÏî£º
+ÌáÊ¾ËµÃ÷£º
+Êä    Èë£ºwrDAdr: write device-address Ð´Æ÷¼þµØÖ·
+   wordAdr: word address ×ÖµØÖ·
+   rdDAdr: read device-address ¶ÁÆ÷¼þµØÖ·
+   *pRdDat: p->read data ¶ÁÈ¡Êý¾ÝÖ¸Õë
+   num: number ¶ÁÈ¡Êý¾Ý¸öÊý
+·µ    »Ø£º
 --------------------------------------------------------------------*/
 uchar I2C_Read_(uint wrDAdr,uchar wordAdr,
       uchar rdDAdr,uchar *pRdDat,uchar num)

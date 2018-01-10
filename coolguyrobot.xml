@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="../../generators/arduino/company/coolguyrobot.js"></script>
 
 <category id="catCOOLGUYROBOT_1" name="酷哥机器人" colour="100">
+
 	<!-- 人工智能-->
 		<category id="catCOOLGUYROBOT_3" name="人工智能" colour="150">
 		<!-- MU摄像头模块 -->
@@ -41,6 +42,65 @@
 			</category>		
 
 		</category>	<!--人工智能结束  -->
+		
+		<category id="catCOOLGUYROBOT_3" name="三轴加速度及电子罗盘" colour="150">
+
+			<block type="coolguy_threeaxis_xyz">
+				<value name="PIN1">
+						<block type="text">
+							<field name="PIN1"></field>
+						</block>
+				</value>
+			</block>
+
+			<block type="coolguy_threeaxis_h"></block>
+
+		</category>	
+
+		<category id="catCOOLGUYROBOT_3" name="RTC时钟" colour="150">
+
+			<block type="coolguy_RTC_read">
+				<value name="PIN1">
+						<block type="text">
+							<field name="PIN1"></field>
+						</block>
+				</value>	
+			</block>
+
+			<block type="coolguy_RTC_set">
+		    	<value name="year">
+		    		<shadow type="math_number">
+		    			<field name="NUM">2018</field>
+		    		</shadow>
+		    	</value>
+		    	<value name="month">
+		    		<shadow type="math_number">
+		    			<field name="NUM">1</field>
+		    		</shadow>
+		    	</value>
+		    	<value name="date">
+		    		<shadow type="math_number">
+		    			<field name="NUM">1</field>
+		    		</shadow>
+		    	</value>
+		    	<value name="hour">
+		    		<shadow type="math_number">
+		    			<field name="NUM">00</field>
+		    		</shadow>
+		    	</value>
+		    	<value name="minute">
+		    		<shadow type="math_number">
+		    			<field name="NUM">00</field>
+		    		</shadow>
+		    	</value>
+		    	<value name="second">
+		    		<shadow type="math_number">
+		    			<field name="NUM">00</field>
+		    		</shadow>
+		    	</value>
+			</block>	
+
+		</category>	
 
 
 	<!-- 其他串口模块 -->
@@ -204,7 +264,13 @@
 					<shadow type="pins_analog"></shadow>
 				</value>
 			</block>	
-	
+
+	  		<block type="coolguy_airtemp">
+	  			<value name="PIN">
+	  				<shadow type="pins_analog"></shadow>
+	  			</value>
+	  		</block>
+
 	  		<block type="coolguy_airquality">
 	  			<value name="PIN">
 	  				<shadow type="pins_analog"></shadow>

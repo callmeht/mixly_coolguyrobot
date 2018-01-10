@@ -157,7 +157,7 @@ Blockly.Arduino.coolguy_record_play = function() {
   return code;
 };
 
-/*温度传感器模块*/
+/*环境温度传感器模块*/
 Blockly.Arduino.coolguy_temp_get = function() {
    var dropdown_pin = this.getTitleValue('PIN');
    // Blockly.Arduino.definitions_['define_"Wire.h'] = '#include <Wire.h>';
@@ -169,8 +169,13 @@ Blockly.Arduino.coolguy_temp_get = function() {
    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-
-
+/*温度探头模块*/
+Blockly.Arduino.coolguy_airtemp = function() {
+   var dropdown_pin = this.getTitleValue('PIN');
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+   var code = 'CoolGuyModule_Sensor::Read_Temperature'+dropdown_pin+')';
+   return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
 
 /*空气质量检测模块*/
 Blockly.Arduino.coolguy_airquality = function() {
@@ -385,7 +390,7 @@ Blockly.Arduino.coolguy_timer = function() {
 
 //********************人工智能***********************
 //************* MU摄像头模块***************
-var dealy_time = 4000;
+var dealy_time= 4000;
 
 Blockly.Arduino.coolguy_mu_setup_type = function() {
     var dropdown_type = this.getTitleValue('PIN1');
@@ -420,144 +425,54 @@ Blockly.Arduino.coolguy_mu_detected = function() {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 //************* MU摄像头模块结束***************
-/*
-var dealy_time = 4000;
-var mode_output = 0;//0表示CALLBACK，1表示DATAFLOW
-Blockly.Arduino.coolguy_mu_setup = function() {
-    var dropdown_type = this.getTitleValue('PIN1');
-    var dropdown_level = this.getTitleValue('PIN2');
-    var dropdown_zoom = this.getTitleValue('PIN3');
-    var dropdown_output = this.getTitleValue('PIN4');
-    if(dropdown_output == "DATAFLOW"){
-      mode_output = 1;
-    }else if(dropdown_output == "CALLBACK"){
-      mode_output = 0;
-    }
-    Blockly.Arduino.definitions_['define_VisionSensor'] = '#include "VisionSensor.h"';
-    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(Serial, 115200);';
-    Blockly.Arduino.setups_['mu_setup_start_serial'] = 'Serial.begin(115200);';
-    Blockly.Arduino.setups_['mu_setup_start'] = 'Serial.println("CMD+SENSOR_SETUP");';
-    Blockly.Arduino.setups_['mu_setup_start_delay'] = 'delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_type']='Serial.println("CMD+VISION_TYPE='+dropdown_type+'");';
-    Blockly.Arduino.setups_['mu_setup_type_delay']='delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_level']='Serial.println("CMD+VISION_LEVEL='+dropdown_level+'");';
-    Blockly.Arduino.setups_['mu_setup_level_delay']='delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_zoom']='Serial.println("CMD+VISION_ZOOM='+dropdown_zoom+'");';
-    Blockly.Arduino.setups_['mu_setup_zoom_delay']='delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_output_uart1']='Serial.println("CMD+UART_STATUS=1");';
-    Blockly.Arduino.setups_['mu_setup_output_delay1']='delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_output_uart']='Serial.println("CMD+UART_OUTPUT='+dropdown_output+'");';
-    Blockly.Arduino.setups_['mu_setup_output_delay2']='delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_output_usb1']='Serial.println("CMD+USB_STATUS=1");';
-    Blockly.Arduino.setups_['mu_setup_output_delay3']='delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_output_usb']='Serial.println("CMD+USB_OUTPUT='+dropdown_output+'");';
-    Blockly.Arduino.setups_['mu_setup_output_delay4']='delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_stop_save'] = 'Serial.println("CMD+SENSOR_SAVE");';
-    Blockly.Arduino.setups_['mu_setup_stop_delay1'] = 'delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_stop_exit'] = 'Serial.println("CMD+SENSOR_EXIT");';
-    Blockly.Arduino.setups_['mu_setup_stop_delay2'] = 'delay(' + dealy_time + ');';
+
+//***************RTC时钟模块******************
+Blockly.Arduino.coolguy_RTC_read = function() {
+    var dropdown_rtc = this.getTitleValue('PIN1');
+    Blockly.Arduino.definitions_['define_iic'] = '#include "iic.h"';
+    Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+    Blockly.Arduino.definitions_['define_RTC_class'] = 'CoolGuyModule_RTC C_RTC;';
+    Blockly.Arduino.setups_['RTC_init'] = 'C_RTC.initial();'; 
+    var code = 'C_RTC.Read_Time_' + dropdown_rtc + '()';
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.coolguy_RTC_set = function() {
+   var year = Blockly.Arduino.valueToCode(this, 'year', Blockly.Arduino.ORDER_ATOMIC);//Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_NONE) || '0';
+   var month = Blockly.Arduino.valueToCode(this, 'month',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var date = Blockly.Arduino.valueToCode(this, 'date',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var hour = Blockly.Arduino.valueToCode(this, 'hour',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var minute = Blockly.Arduino.valueToCode(this, 'minute',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var second = Blockly.Arduino.valueToCode(this, 'second',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+    Blockly.Arduino.definitions_['define_iic'] = '#include "iic.h"';
+    Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+    Blockly.Arduino.definitions_['define_RTC_class'] = 'CoolGuyModule_RTC C_RTC;';
+    Blockly.Arduino.setups_['RTC_init'] = 'C_RTC.initial();'; 
+    Blockly.Arduino.setups_['RTC_set'] = 'C_RTC.Set_Time('+year+','+month+','+date+','+hour+','+minute+','+second+');\n';
     var code = '';
     return code;
 };
-
-Blockly.Arduino.coolguy_mu_data_read = function() {
-  Blockly.Arduino.setups_['mu_setup_initialize'] = 'MU.begin();';  
-  var code = '';
-  if(mode_output == 0){//0表示CALLBACK，1表示DATAFLOW
-    code = 'Serial.println("CMD+VISION_DETECT=X");\n';
-  }
-  code += 'MU.search();\n';
-  return code;
-};
-
-Blockly.Arduino.coolguy_mu_setup_start = function() {
-    Blockly.Arduino.definitions_['define_VisionSensor'] = '#include "VisionSensor.h"';
-    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(Serial, 115200);';
-    Blockly.Arduino.setups_['mu_setup_start_serial'] = 'Serial.begin(115200);';
-    Blockly.Arduino.setups_['mu_setup_start'] = 'Serial.println("CMD+SENSOR_SETUP");';
-    Blockly.Arduino.setups_['mu_setup_start_delay'] = 'delay(' + dealy_time + ');';
+//****************三轴加速度及电子罗盘**********************
+Blockly.Arduino.coolguy_threeaxis_xyz = function() {
+    var dropdown_xyz = this.getTitleValue('PIN1');
+    Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+    Blockly.Arduino.definitions_['define_threeaxis_class'] = 'CoolGuyModule_ElectroniccompassandThreeAxis T_Axis;';
+    Blockly.Arduino.setups_['threeaxis_init'] = 'T_Axis.initial();'; 
     var code = '';
-    return code;
-};
-
-Blockly.Arduino.coolguy_mu_setup_stop = function() {
-    Blockly.Arduino.setups_['mu_setup_stop_save'] = 'Serial.println("CMD+SENSOR_SAVE");';
-    Blockly.Arduino.setups_['mu_setup_stop_delay1'] = 'delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_stop_exit'] = 'Serial.println("CMD+SENSOR_EXIT");';
-    Blockly.Arduino.setups_['mu_setup_stop_delay2'] = 'delay(' + dealy_time + ');';
-    var code = '';
-    return code;
-};
-
-Blockly.Arduino.coolguy_mu_setup_level = function() {
-  var dropdown_pin1 = this.getTitleValue('PIN1');
-  Blockly.Arduino.setups_['mu_setup_level']='Serial.println("CMD+VISION_LEVEL='+dropdown_pin1+'");';
-  Blockly.Arduino.setups_['mu_setup_level_delay']='delay(' + dealy_time + ');';
-  var code = '';
-  return code;
-};
-
-Blockly.Arduino.coolguy_mu_setup_zoom = function() {
-  var dropdown_pin1 = this.getTitleValue('PIN1');
-  Blockly.Arduino.setups_['mu_setup_zoom']='Serial.println("CMD+VISION_ZOOM='+dropdown_pin1+'");';
-  Blockly.Arduino.setups_['mu_setup_zoom_delay']='delay(' + dealy_time + ');';
-  var code = '';
-  return code;
-};
-
-var mode_output = 0;//0表示CALLBACK，1表示DATAFLOW
-Blockly.Arduino.coolguy_mu_setup_output = function() {
-  var dropdown_pin1 = this.getTitleValue('PIN1');
-  if(dropdown_pin1 == "DATAFLOW"){
-    mode_output = 1;
-  }else if(dropdown_pin1 == "CALLBACK"){
-    mode_output = 0;
-  }
-  Blockly.Arduino.setups_['mu_setup_output_uart1']='Serial.println("CMD+UART_STATUS=1");';
-  Blockly.Arduino.setups_['mu_setup_output_delay1']='delay(' + dealy_time + ');';
-  Blockly.Arduino.setups_['mu_setup_output_uart']='Serial.println("CMD+UART_OUTPUT='+dropdown_pin1+'");';
-  Blockly.Arduino.setups_['mu_setup_output_delay2']='delay(' + dealy_time + ');';
-  Blockly.Arduino.setups_['mu_setup_output_usb1']='Serial.println("CMD+USB_STATUS=1");';
-  Blockly.Arduino.setups_['mu_setup_output_delay3']='delay(' + dealy_time + ');';
-  Blockly.Arduino.setups_['mu_setup_output_usb']='Serial.println("CMD+USB_OUTPUT='+dropdown_pin1+'");';
-  Blockly.Arduino.setups_['mu_setup_output_delay4']='delay(' + dealy_time + ');';
-  var code = '';
-  return code;
-};
-
-Blockly.Arduino.coolguy_mu_datavalid = function() {
-    Blockly.Arduino.definitions_['define_VisionSensor'] = '#include "VisionSensor.h"';
-    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(Serial, 115200);';
-    Blockly.Arduino.setups_['mu_setup_initialize'] = 'MU.begin();';  
-    var code = 'MU.valid() ';
+    if( dropdown_xyz == 1 ){
+      code = 'T_Axis.XYZandHeading_display_X()';
+    }else if( dropdown_xyz == 2 ){
+      code = 'T_Axis.XYZandHeading_display_Y()';
+    }else if( dropdown_xyz == 3 ){
+      code = 'T_Axis.XYZandHeading_display_Z()';
+    }else;
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.coolguy_mu_getx = function() {
-    Blockly.Arduino.definitions_['define_VisionSensor'] = '#include "VisionSensor.h"';
-    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(Serial, 115200);';
-    var code = 'MU.getX()';
+Blockly.Arduino.coolguy_threeaxis_h = function() {
+    Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+    Blockly.Arduino.definitions_['define_threeaxis_class'] = 'CoolGuyModule_ElectroniccompassandThreeAxis T_Axis;';
+    Blockly.Arduino.setups_['threeaxis_init'] = 'T_Axis.initial();'; 
+    var code = 'T_Axis.XYZandHeading_display_H()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
-
-Blockly.Arduino.coolguy_mu_gety = function() {
-    Blockly.Arduino.definitions_['define_VisionSensor'] = '#include "VisionSensor.h"';
-    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(Serial, 115200);';
-    var code = 'MU.getY()';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-Blockly.Arduino.coolguy_mu_getwidth = function() {
-    Blockly.Arduino.definitions_['define_VisionSensor'] = '#include "VisionSensor.h"';
-    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(Serial, 115200);';
-    var code = 'MU.getWidth()';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-Blockly.Arduino.coolguy_mu_getheight = function() {
-    Blockly.Arduino.definitions_['define_VisionSensor'] = '#include "VisionSensor.h"';
-    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(Serial, 115200);';
-    var code = 'MU.getHeight()';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
-};*/
-

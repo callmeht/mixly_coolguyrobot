@@ -307,18 +307,29 @@ Blockly.Blocks.coolguy_record_play = {
   }
 };
 
-/*温度传感器模块*/
+/*环境温度传感器模块*/
 Blockly.Blocks.coolguy_temp_get = {
   init: function() {
     this.setColour(Blockly.Blocks.coolguyrobot.HUE_sensor_analog);
     this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_TEMP_SETUP)
-        .appendTitle(new Blockly.FieldDropdown(COOLGUY_ALL_INPUT), "PIN");
+        .appendTitle(Blockly.MIXLY_COOLGUY_TEMP_SETUP_AIR)
+        .appendTitle(new Blockly.FieldDropdown(COOLGUY_ANALOG_INPUT), "PIN");
     this.setInputsInline(true);
     this.setOutput(true, Number);
   }
 };
 
+/*温度探头模块*/
+Blockly.Blocks.coolguy_airtemp = {
+  init: function() {
+    this.setColour(Blockly.Blocks.coolguyrobot.HUE_sensor_analog);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_TEMP_SETUP_LIQ)
+        .appendTitle(new Blockly.FieldDropdown(COOLGUY_ALL_INPUT), "PIN");
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+  }
+};
 
 /*空气质量检测模块*/
 Blockly.Blocks.coolguy_airquality = {
@@ -654,141 +665,74 @@ Blockly.Blocks.coolguy_mu_detected = {
   }
 };//************* MU摄像头模块结束***************
 
-/*
-Blockly.Blocks.coolguy_mu_setup_start =  {
+//***************RTC时钟模块******************
+var COOLGUY_RTC_ALL=[["年份", "Year"],["月份", "Month"],["日期", "Date"],["时", "Hour"],["分", "Minute"],["秒", "Second"]];
+Blockly.Blocks.coolguy_RTC_read = {
   init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE2);
+    this.setColour(Blockly.Blocks.coolguyrobot.HUE_sensor_analog);
     this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_START);   
-    // this.appendStatementInput('DO')
-    //     .appendField('');
+        .appendTitle(Blockly.MIXLY_COOLGUY_RTC_READ)
+        .appendTitle(new Blockly.FieldDropdown(COOLGUY_RTC_ALL), "PIN1");
     this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setTooltip(Blockly.MIXLY_COOLGUY_MU_SETUP_START_TOOLTIP);
+    this.setOutput(true, Number);
   }
 };
 
-Blockly.Blocks.coolguy_mu_setup_stop =  {
-  init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE2);
-    this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_STOP);
-        //.appendTitle(new Blockly.FieldDropdown(COOLGUY_ANALOG_INPUT), "PIN");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setTooltip(Blockly.MIXLY_COOLGUY_MU_SETUP_STOP_TOOLTIP);
-  }
-};
-
-var COOLGUY_MU_LEVEL=[["1", "1"],["2", "2"],["3", "3"],["4", "4"],["5", "5"]];
-Blockly.Blocks.coolguy_mu_setup_level = {
+Blockly.Blocks.coolguy_RTC_set =  {
   init: function() {
     this.setColour(Blockly.Blocks.coolguyrobot.HUE);
     this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_LEVEL)
-        .appendTitle(new Blockly.FieldDropdown(COOLGUY_MU_LEVEL), "PIN1");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setTooltip(Blockly.MIXLY_COOLGUY_MU_SETUP_TYPE_TOOLTIP);
-  }
-};
-
-var COOLGUY_MU_ZOOM=[["1", "1"],["2", "2"],["3", "3"],["4", "4"],["5", "5"]];
-Blockly.Blocks.coolguy_mu_setup_zoom = {
-  init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+        .appendTitle(Blockly.MIXLY_COOLGUY_RTC_SET);
+    this.appendValueInput("year", Number)
+        .setCheck(Number);
     this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_ZOOM)
-        .appendTitle(new Blockly.FieldDropdown(COOLGUY_MU_ZOOM), "PIN1");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setTooltip(Blockly.MIXLY_COOLGUY_MU_SETUP_LEVEL_TOOLTIP);
-  }
-};
-
-var COOLGUY_MU_OUTPUT=[["连续模式", "DATAFLOW"],["读取模式", "CALLBACK"]];
-Blockly.Blocks.coolguy_mu_setup_output = {
-  init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE);
+        .appendTitle(Blockly.MIXLY_COOLGUY_RTC_SET_YEAR);
+    this.appendValueInput('month')
+        .setCheck(Number);
     this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_OUTPUT)
-        .appendTitle(new Blockly.FieldDropdown(COOLGUY_MU_OUTPUT), "PIN1");
+        .appendTitle(Blockly.MIXLY_COOLGUY_RTC_SET_MONTH);
+    this.appendValueInput('date')
+        .setCheck(Number);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_RTC_SET_DATE);
+    this.appendValueInput('hour')
+        .setCheck(Number);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_RTC_SET_HOUR);
+    this.appendValueInput('minute')
+        .setCheck(Number);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_RTC_SET_MINUTE);
+    this.appendValueInput('second')
+        .setCheck(Number);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_RTC_SET_SECOND);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
   }
 };
 
-Blockly.Blocks.coolguy_mu_getx = {
+var COOLGUY_THREEAXIS_XYZ=[["x", "1"],["y", "2"],["z", "3"]];
+Blockly.Blocks.coolguy_threeaxis_xyz = {
   init: function() {
     this.setColour(Blockly.Blocks.coolguyrobot.HUE_sensor_analog);
     this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_GETX);
+        .appendTitle(Blockly.MIXLY_COOLGUY_THREEAXIS_READ)
+        .appendTitle(new Blockly.FieldDropdown(COOLGUY_THREEAXIS_XYZ), "PIN1");
+    this.appendDummyInput("")
+        .appendTitle(Blockly.MIXLY_COOLGUY_THREEAXIS_AXIS);
     this.setInputsInline(true);
     this.setOutput(true, Number);
   }
 };
 
-Blockly.Blocks.coolguy_mu_gety = {
+Blockly.Blocks.coolguy_threeaxis_h = {
   init: function() {
     this.setColour(Blockly.Blocks.coolguyrobot.HUE_sensor_analog);
     this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_GETY);
+        .appendTitle(Blockly.MIXLY_COOLGUY_THREEAXIS_H);
     this.setInputsInline(true);
     this.setOutput(true, Number);
   }
 };
-
-Blockly.Blocks.coolguy_mu_getwidth = {
-  init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE_sensor_analog);
-    this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_GETWIDTH);
-    this.setInputsInline(true);
-    this.setOutput(true, Number);
-  }
-};
-
-Blockly.Blocks.coolguy_mu_getheight = {
-  init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE_sensor_analog);
-    this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_GETHEIGHT);
-    this.setInputsInline(true);
-    this.setOutput(true, Number);
-  }
-};
-
-var COOLGUY_MU_TYPE=[["人体检测", "BODY"],["球体检测", "BALL"],["人脸检测", "FACE"],["线条检测", "LINE"],["移动物体检测", "MOVINGOBJECT"]];
-var COOLGUY_MU_LEVEL=[["1", "1"],["2", "2"],["3", "3"],["4", "4"],["5", "5"]];
-var COOLGUY_MU_ZOOM=[["1", "1"],["2", "2"],["3", "3"],["4", "4"],["5", "5"]];
-var COOLGUY_MU_OUTPUT=[["连续模式", "DATAFLOW"],["读取模式", "CALLBACK"]];
-Blockly.Blocks.coolguy_mu_setup =  {
-  init: function() {
-    this.setColour(Blockly.Blocks.coolguyrobot.HUE2);
-    this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_START);  
-    this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_TYPE)
-        .appendTitle(new Blockly.FieldDropdown(COOLGUY_MU_TYPE), "PIN1");
-    this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_LEVEL)
-        .appendTitle(new Blockly.FieldDropdown(COOLGUY_MU_LEVEL), "PIN2");
-    this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_ZOOM)
-        .appendTitle(new Blockly.FieldDropdown(COOLGUY_MU_ZOOM), "PIN3");
-    this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_OUTPUT)
-        .appendTitle(new Blockly.FieldDropdown(COOLGUY_MU_OUTPUT), "PIN4");
-    this.appendDummyInput("")
-        .appendTitle(Blockly.MIXLY_COOLGUY_MU_SETUP_STOP);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    // this.setTooltip(Blockly.MIXLY_COOLGUY_MU_SETUP_START_TOOLTIP);
-  }
-};*/
-

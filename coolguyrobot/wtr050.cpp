@@ -4,7 +4,16 @@
 #define WTR050_PLAY         0x03
 #define NONE				0xff
 
+
+
 wtr050::wtr050(int pin)
+{
+	this->pin = pin;
+	pinMode(pin, OUTPUT);
+	digitalWrite(pin, HIGH);
+}
+
+void wtr050::wtr050Init(int pin)
 {
 	this->pin = pin;
 	pinMode(pin, OUTPUT);
