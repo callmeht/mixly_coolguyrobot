@@ -1,99 +1,186 @@
 /* morpx.inc copyright */
-
+#include <SoftwareSerial.h>
 #include <VisionSensor.h>
+//***********************************
+
+SoftwareSerial mySerial(14,15);
 
 
-VisionSensor::VisionSensor(HardwareSerial &uart, uint32_t baud): m_puart(&uart)
+/*VisionSensor::VisionSensor(HardwareSerial &uart, uint32_t baud): m_puart(&uart)
 {
 	_baud = baud;
 	_valid = false;
+}*/
+
+VisionSensor::VisionSensor(uint32_t baud)
+{
+	_baud = baud;
+	_valid = false;
+	SetPort(A0);
+}
+void VisionSensor::SetPort(int pin)
+{
+	int Rxpin,Txpin;
+	if(pin==A0)
+	{
+		Rxpin=A0;
+		Txpin=A1;
+	}
+	else if(pin==A2)
+	{
+		Rxpin=A2;
+		Txpin=A3;
+	}
+	else
+	{
+		Rxpin=A4;
+		Txpin=A5;
+	}
+	delete mySerial_p;
+	mySerial_p = new SoftwareSerial(Rxpin,Txpin);
+}
+void VisionSensor::begin(uint8_t Y)
+{
+  mySerial_p->begin(115200);
+	mySerial_p->println("CMD+SENSOR_SETUP");
+  delay(4000);
+
+if(Y==3)
+{
+    mySerial_p->println("CMD+VISION_TYPE=BODY");
+
+  delay(4000);
+}
+if(Y==1)
+{
+  mySerial_p->println("CMD+VISION_TYPE=BALL");
+
+  delay(4000);
+}
+if(Y==4)
+{
+	mySerial_p->println("CMD+VISION_TYPE=FACE");
+  delay(4000);
+}
+if(Y==2)
+{
+	mySerial_p->println("CMD+VISION_TYPE=LINE");
+  delay(4000);
+}
+if(Y==5)
+{
+	mySerial_p->println("CMD+VISION_TYPE=MOVINGOBJECT");
+  delay(4000);
+}
+if(Y==6)
+{
+	mySerial_p->println("CMD+VISION_TYPE=MULTIFACE");
+    delay(4000);
+}
+if(Y==7)
+{
+	mySerial_p->println("CMD+VISION_TYPE=CARD");
+  delay(4000);
+}  
+
+	mySerial_p->println("CMD+UART_OUTPUT=CALLBACK");
+  delay(4000);
+
+	mySerial_p->println("CMD+SENSOR_SAVE");
+  delay(4000);
+
+	mySerial_p->println("CMD+SENSOR_EXIT");
+	if(Y==6)
+    mySerial_p->println("CMD+VISION_OPTION=FACETRAIN");
+	mySerial_p->begin(_baud);
+    while(mySerial_p->available()>0)	
+	{
+		mySerial_p->read();
+	}
 }
 
 void VisionSensor::begin(void)
 {
-  m_puart->begin(_baud);
-  while (m_puart->available() > 0)
+  mySerial_p->begin(_baud);
+  while(mySerial_p->available()>0)
   {
-    m_puart->read();
+	  mySerial_p->read();
   }
 }
-
-boolean VisionSensor::valid(void)
+boolean VisionSensor::Valid(void)
 {
   return _valid;
 }
 
-void VisionSensor::search(void)
+void VisionSensor::Search(void)
 {
-	//m_puart->print("tp0");
-  while(m_puart->available() > 0)
-  {
-    uint8_t dataByte = m_puart->read();
-    //m_puart->print("tp1");
-	
-    if (dataByte == 0xFE)
-    { 
-	 // m_puart->print("tp2");
-      comdata[data_p] = dataByte;
-	    uint8_t temp_p = data_p;
-	    data_p = 0;
-	  
-      if (comdata[temp_p-1] == 0xFF)
-      {
-      	//m_puart->print("tp3");
-		dataDetected = comdata[0];
-        dataX = comdata[1];
-        dataY = comdata[2];
-        dataWidth = comdata[3];
-        dataHeight = comdata[4];
-        if (comdata[5] == 0xED)
-        {
-        	_valid = true;
-        	//m_puart->print("tp4");
-		}
-
+   delay(30);
+  mySerial_p->println("CMD+VISION_DETECT=RESULT");
+	while(mySerial_p->available() >= 8)
+ {
+	  uint8_t dataByte = mySerial_p->read();
+	  uint8_t dataCount = 0;
+    if (dataByte == 0xFF) {
+      memset(comdata, 0, sizeof(comdata));
+      comdata[dataCount] = dataByte;
+      dataCount++;
+	  dataByte = mySerial_p->read();
+      if (dataByte == 0xFE) {
+        comdata[dataCount] = dataByte;
+        dataCount++;
+      } else {
+        continue;
       }
-      else
-      {
-        _valid = false;
+      for (;(dataCount < sizeof(comdata))&&(comdata[dataCount]!=0xED);dataCount++) {
+	   dataByte = mySerial_p->read();
+        comdata[dataCount] = dataByte;
       }
-    }
-    else
-    {
-      comdata[data_p] = dataByte ;
-      data_p++;
+      if (comdata[7] == 0xED) {
+        dataDetected = comdata[2];
+        dataX = comdata[3];
+        dataY = comdata[4];
+        dataWidth = comdata[5];
+        dataHeight = comdata[6];
+        _valid = true;
+        return;
+      }
     }
   }
+	_valid = false;
+
 }
 
-boolean VisionSensor::detected(void)
+uint8_t VisionSensor::Detected(void)
 {
-	if(dataDetected == 0x01 || dataDetected == 0x02 || dataDetected == 0x03 || dataDetected == 0x04 || dataDetected == 0x05 )
-	//if(dataDetected == 0x05)
-	{
-		return true;
-	}
-	
-	return false;
+	return dataDetected;
 }
 
-uint8_t VisionSensor::getX(void)
+uint8_t VisionSensor::GetX(void)
 {
   return dataX;
 }
 
-uint8_t VisionSensor::getY(void)
+uint8_t VisionSensor::GetY(void)
 {
   return dataY;
 }
 
-uint8_t VisionSensor::getWidth(void)
+uint8_t VisionSensor::GetWidth(void)
 {
   return dataWidth;
 }
 
-uint8_t VisionSensor::getHeight(void)
+uint8_t VisionSensor::GetHeight(void)
 {
   return dataHeight;
+}
+
+boolean VisionSensor::Detected(uint8_t x)
+{
+  if(Valid()&&Detected()==x)
+  {
+    return true;
+  }
+  return false;
 }
 

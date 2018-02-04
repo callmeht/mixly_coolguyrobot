@@ -3,27 +3,45 @@
 
 #include <inttypes.h>
 #include <Arduino.h>
+#include <SoftwareSerial.h>
+
+#define CARD 7
+#define MULTIFACE 6
+#define MOVINGOBJECT 5
+#define FACE 4
+#define BODY 3
+#define LINE 2
+#define BALL 1
+#define Card_Squar 9
+#define Card_Trian 8
+#define Card_Round 7
 
 class VisionSensor
 {
   public:
-   VisionSensor(HardwareSerial &uart, uint32_t baud = 115200);
+   //VisionSensor(HardwareSerial &uart, uint32_t baud = 115200);
+   VisionSensor(uint32_t baud = 115200);
+   void SetPort(int pin);
+   void begin(uint8_t Y);
    void begin(void);
-   boolean valid(void);
-   void search(void);
-   boolean detected(void);
-   uint8_t getX(void);
-   uint8_t getY(void);
-   uint8_t getWidth(void);
-   uint8_t getHeight(void);
+   boolean Valid(void);
+   boolean Detected(uint8_t x);
+   void Search(void);
+   uint8_t Detected(void);
+   uint8_t GetX(void);
+   uint8_t GetY(void);
+   uint8_t GetWidth(void);
+   uint8_t GetHeight(void);
+ //  SoftwareSerial mySerial(14,15);
    
   private:
-   HardwareSerial *m_puart;
+  // HardwareSerial *m_puart;
    uint8_t dataDetected;
    uint8_t dataX,dataY,dataWidth,dataHeight;
-   uint8_t comdata[100], data_p = 0; 
+   uint8_t comdata[8], data_p = 0; 
    uint32_t _baud;
    boolean _valid;
+   SoftwareSerial *mySerial_p;
 };
 
 #endif

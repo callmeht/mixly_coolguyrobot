@@ -2,7 +2,7 @@
 #define CoolGuy_h
 
 #include <Arduino.h>
-#include <avr/io.h>  µ×²ãIO¿Ú¼Ä´æÆ÷²Ù×÷¿â
+//#include <avr/io.h>  µ×²ãIO¿Ú¼Ä´æÆ÷²Ù×÷¿â
 
 class CoolGuy_Led
 {

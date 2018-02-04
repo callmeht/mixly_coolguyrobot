@@ -183,76 +183,8 @@ Blockly.Arduino.coolguy_airquality = function() {
    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-/*声音传感器*/
-Blockly.Arduino.coolguy_sensor_sound = function() {
-  var dropdown_pin = this.getTitleValue('PIN');
-  Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
-  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
-  var code = '!digitalRead('+dropdown_pin+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
 
-/*红外测距传感器*/
-Blockly.Arduino.coolguy_sensor_irranging = function() {
-  var dropdown_pin = this.getTitleValue('PIN');
-  Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
-  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
-  var code = '!digitalRead('+dropdown_pin+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-/*光敏传感器*/
-Blockly.Arduino.coolguy_sensor_photo = function() {
-  var dropdown_pin = this.getTitleValue('PIN');
-  Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
-  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
-  var code = '!digitalRead('+dropdown_pin+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-
-/*按键传感器*/
-Blockly.Arduino.coolguy_sensor_switch = function() {
-  var dropdown_pin = this.getTitleValue('PIN');
-  Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
-  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
-  var code = '!digitalRead('+dropdown_pin+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-/*火焰传感器*/
-Blockly.Arduino.coolguy_sensor_fire = function() {
-  var dropdown_pin = this.getTitleValue('PIN');
-  Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
-  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
-  var code = '!digitalRead('+dropdown_pin+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-/*震动传感器*/
-Blockly.Arduino.coolguy_sensor_shock = function() {
-  var dropdown_pin = this.getTitleValue('PIN');
-  Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
-  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
-  var code = '!digitalRead('+dropdown_pin+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-/*触摸开关*/
-Blockly.Arduino.coolguy_sensor_touch = function() {
-  var dropdown_pin = this.getTitleValue('PIN');
-  Blockly.Arduino.definitions_['define_"Arduino']='#include <Arduino.h>';
-  Blockly.Arduino.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
-  Blockly.Arduino.setups_['setup_input_pull_up'+dropdown_pin] = 'digitalWrite('+dropdown_pin+',HIGH);';
-  var code = '!digitalRead('+dropdown_pin+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};/*                    其他传感器模块结束                     */
+/*                    其他传感器模块结束                     */
 
 /*                       电机模块                             */
 /*左电机*/
@@ -297,7 +229,7 @@ Blockly.Arduino.coolguy_oled_English = function() {
   var str3 = Blockly.Arduino.valueToCode(this, 'TEXT3', Blockly.Arduino.ORDER_ATOMIC) || 'String(\"\")'
   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
   Blockly.Arduino.definitions_['define_coolguy_oled1'] = 'CoolGuyModule_OLED OLED;';
-  var code = 'OLED.OLED_DrawString('+dropdown_pin1+','+dropdown_pin2+', '+str3+');\n';
+  var code = 'OLED.OLED_Print('+dropdown_pin1+','+dropdown_pin2+', '+str3+');\n';
   return code;
 };
 
@@ -308,7 +240,7 @@ Blockly.Arduino.coolguy_oled_number = function() {
   var num = Blockly.Arduino.valueToCode(this, 'num',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
   Blockly.Arduino.definitions_['define_coolguy_oled1'] = 'CoolGuyModule_OLED OLED;';
-  var code = 'OLED.OLED_DrawValue('+dropdown_pin1+','+dropdown_pin2+', '+num+');\n';
+  var code = 'OLED.OLED_Print('+dropdown_pin1+','+dropdown_pin2+', '+num+');\n';
   return code;
 };
 
@@ -328,6 +260,17 @@ Blockly.Arduino.coolguy_Nixietube = function() {
    var code = 'CoolGuy_Digital::Set_Digital('+dropdown_pin+', '+num+');\n';
    return code;
 };
+
+/*数码管显示时钟*/
+Blockly.Arduino.coolguy_Clock = function() {
+   var num1 = Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var dropdown_pin = this.getTitleValue('PIN');
+   Blockly.Arduino.definitions_['define_"CoolGuy'] = '#include <CoolGuy.h>';
+   var code = 'CoolGuy_Digital2::Set_Digital2('+dropdown_pin+', '+num1+','+num2+');\n';
+   return code;
+};
+
 
 /*LED灯*/
 Blockly.Arduino.coolguy_led = function() {
@@ -375,13 +318,13 @@ Blockly.Arduino.coolguy_timer = function() {
 };
 
 /*部分数字端口设为输出*/
-// Blockly.Arduino.coolguy_allportinitial = function() {
-//   Blockly.Arduino.setups_['setup_input_initial port2'] = 'pinMode(2, OUTPUT);';
-//   Blockly.Arduino.setups_['setup_input_initial port3'] = 'pinMode(3, OUTPUT);';
-//   Blockly.Arduino.setups_['setup_input_initial port4'] = 'pinMode(4, OUTPUT);';
-//   Blockly.Arduino.setups_['setup_input_initial port12'] = 'pinMode(12, OUTPUT);';
-//   Blockly.Arduino.setups_['setup_input_initial port13'] = 'pinMode(13, OUTPUT);';
-//   Blockly.Arduino.setups_['setup_input_initial port9'] = 'pinMode(9, OUTPUT);';
+// Blockly.Arduino.coolguy_allportInitial = function() {
+//   Blockly.Arduino.setups_['setup_input_Initial port2'] = 'pinMode(2, OUTPUT);';
+//   Blockly.Arduino.setups_['setup_input_Initial port3'] = 'pinMode(3, OUTPUT);';
+//   Blockly.Arduino.setups_['setup_input_Initial port4'] = 'pinMode(4, OUTPUT);';
+//   Blockly.Arduino.setups_['setup_input_Initial port12'] = 'pinMode(12, OUTPUT);';
+//   Blockly.Arduino.setups_['setup_input_Initial port13'] = 'pinMode(13, OUTPUT);';
+//   Blockly.Arduino.setups_['setup_input_Initial port9'] = 'pinMode(9, OUTPUT);';
 //   var code = '';
 //   return code;
 // };/*                      系统模块结束                             */
@@ -392,46 +335,50 @@ var dealy_time= 4000;
 
 Blockly.Arduino.coolguy_mu_setup_type = function() {
     var dropdown_type = this.getTitleValue('PIN1');
+    var dropdown_pin = this.getTitleValue('PIN2');
     Blockly.Arduino.definitions_['define_VisionSensor'] = '#include "VisionSensor.h"';
-    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(Serial, 115200);';
-    Blockly.Arduino.setups_['mu_setup_start_serial'] = 'Serial.begin(115200);';
-    Blockly.Arduino.setups_['mu_setup_start'] = 'Serial.println("CMD+SENSOR_SETUP");';
-    Blockly.Arduino.setups_['mu_setup_start_delay'] = 'delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_type']='Serial.println("CMD+VISION_TYPE='+dropdown_type+'");';
-    Blockly.Arduino.setups_['mu_setup_type_delay']='delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_stop_save'] = 'Serial.println("CMD+SENSOR_SAVE");';
-    Blockly.Arduino.setups_['mu_setup_stop_delay1'] = 'delay(' + dealy_time + ');';
-    Blockly.Arduino.setups_['mu_setup_stop_exit'] = 'Serial.println("CMD+SENSOR_EXIT");';
-    Blockly.Arduino.setups_['mu_setup_stop_delay2'] = 'delay(' + dealy_time + ');';
-    var code = '';
+    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(115200);';
+    var code = 'MU.begin('+dropdown_type+');\n';
+    code += 'MU.SetPort('+dropdown_pin+');\n';
     return code;
 };
 
 Blockly.Arduino.coolguy_mu_data_read = function() {
-  Blockly.Arduino.setups_['mu_setup_initialize'] = 'MU.begin();';  
+  Blockly.Arduino.definitions_['define_VisionSensor'] = '#include "VisionSensor.h"';
+    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(115200);';
+  Blockly.Arduino.setups_['mu_setup_Initialize'] = 'MU.begin();'; 
   var code = '';
-  code = 'Serial.println("CMD+VISION_DETECT=X");\n';
-  code += 'MU.search();\n';
+  code += 'MU.Search();\n';
   return code;
 };
-
-Blockly.Arduino.coolguy_mu_detected = function() {
+Blockly.Arduino.coolguy_mu_checktype = function() {
+  var dropdown_typel = this.getTitleValue('PIN');
     Blockly.Arduino.definitions_['define_VisionSensor'] = '#include "VisionSensor.h"';
-    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(Serial, 115200);';
-    Blockly.Arduino.setups_['mu_setup_initialize'] = 'MU.begin();'; 
-    var code = '( (MU.valid() ) && MU.detected() )';
+    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(115200);';
+    Blockly.Arduino.setups_['mu_setup_Initialize'] = 'MU.begin();'; 
+    var code = 'MU.Detected('+dropdown_typel+')';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+Blockly.Arduino.coolguy_mu_cardtype = function() {
+  var dropdown_typel = this.getTitleValue('PIN');
+    Blockly.Arduino.definitions_['define_VisionSensor'] = '#include "VisionSensor.h"';
+    Blockly.Arduino.definitions_['define_VisionSensor_class'] = 'VisionSensor MU(115200);';
+    Blockly.Arduino.setups_['mu_setup_Initialize'] = 'MU.begin();'; 
+    var code = 'MU.Detected('+dropdown_typel+')';
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
 //************* MU摄像头模块结束***************
 
 //***************RTC时钟模块******************
 Blockly.Arduino.coolguy_RTC_read = function() {
     var dropdown_rtc = this.getTitleValue('PIN1');
-    Blockly.Arduino.definitions_['define_iic'] = '#include "iic.h"';
     Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
     Blockly.Arduino.definitions_['define_RTC_class'] = 'CoolGuyModule_RTC C_RTC;';
-    Blockly.Arduino.setups_['RTC_init'] = 'C_RTC.initial();'; 
-    var code = 'C_RTC.Read_Time_' + dropdown_rtc + '()';
+    Blockly.Arduino.setups_['RTC_init'] = 'C_RTC.Initial();'; 
+    var code = 'C_RTC.Read_Time('+ dropdown_rtc +')';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -445,7 +392,7 @@ Blockly.Arduino.coolguy_RTC_set = function() {
     Blockly.Arduino.definitions_['define_iic'] = '#include "iic.h"';
     Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
     Blockly.Arduino.definitions_['define_RTC_class'] = 'CoolGuyModule_RTC C_RTC;';
-    Blockly.Arduino.setups_['RTC_init'] = 'C_RTC.initial();'; 
+    Blockly.Arduino.setups_['RTC_init'] = 'C_RTC.Initial();'; 
     Blockly.Arduino.setups_['RTC_set'] = 'C_RTC.Set_Time('+year+','+month+','+date+','+hour+','+minute+','+second+');\n';
     var code = '';
     return code;
@@ -455,22 +402,77 @@ Blockly.Arduino.coolguy_threeaxis_xyz = function() {
     var dropdown_xyz = this.getTitleValue('PIN1');
     Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
     Blockly.Arduino.definitions_['define_threeaxis_class'] = 'CoolGuyModule_ElectroniccompassandThreeAxis T_Axis;';
-    Blockly.Arduino.setups_['threeaxis_init'] = 'T_Axis.initial();'; 
-    var code = '';
-    if( dropdown_xyz == 1 ){
-      code = 'T_Axis.XYZandHeading_display_X()';
-    }else if( dropdown_xyz == 2 ){
-      code = 'T_Axis.XYZandHeading_display_Y()';
-    }else if( dropdown_xyz == 3 ){
-      code = 'T_Axis.XYZandHeading_display_Z()';
-    }else;
+    Blockly.Arduino.setups_['threeaxis_init'] = 'T_Axis.Initial();'; 
+    var code = 'T_Axis.XYZandHeading_display('+dropdown_xyz+')';
+
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.coolguy_threeaxis_h = function() {
     Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
     Blockly.Arduino.definitions_['define_threeaxis_class'] = 'CoolGuyModule_ElectroniccompassandThreeAxis T_Axis;';
-    Blockly.Arduino.setups_['threeaxis_init'] = 'T_Axis.initial();'; 
+    Blockly.Arduino.setups_['threeaxis_init'] = 'T_Axis.Initial();'; 
     var code = 'T_Axis.XYZandHeading_display_H()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/*RGB模块*/
+Blockly.Arduino.coolguy_rgb_port = function() {
+   var dropdown_pin = this.getTitleValue('PIN');
+   Blockly.Arduino.definitions_['define_CoolGuyModule_WS2812'] = 'CoolGuyModule_WS2812 RGB(10);';
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+   var code = 'RGB.SetOutput(' + dropdown_pin +');';
+   return code;
+};
+
+Blockly.Arduino.coolguy_rgb_color = function() {
+   var num1 = Blockly.Arduino.valueToCode(this, 'num1', Blockly.Arduino.ORDER_ATOMIC);//Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_NONE) || '0';
+   var num2 = Blockly.Arduino.valueToCode(this, 'num2',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var num3 = Blockly.Arduino.valueToCode(this, 'num3',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   var num4 = Blockly.Arduino.valueToCode(this, 'num4',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+   Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+   Blockly.Arduino.definitions_['define_CoolGuyModule_WS2812'] = 'CoolGuyModule_WS2812 RGB(10);';
+   var code = 'RGB.SetRGB('+num1+','+num2+','+num3+','+num4+');\n';
+    return code;
+};
+
+//****************WIFI**********************
+Blockly.Arduino.COOLGUY_iCloud_Read_String = function() {
+  var str = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || 'String(\"\")'
+  var pin = this.getTitleValue('PIN');
+  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+  Blockly.Arduino.definitions_['define_iCloud_class'] = 'CoolGuyModule_iCloudMemory WIFI;';
+  Blockly.Arduino.setups_['CoolGuyModule_iCloudMemory_init'] = 'WIFI.Serial_Init();'; 
+  var code = 'WIFI.iCloud_Read_String('+str+','+pin+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.COOLGUY_iCloud_Read_Float = function() {
+  var str = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || 'String(\"\")'
+  var pin = this.getTitleValue('PIN');
+  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+    Blockly.Arduino.definitions_['define_iCloud_class'] = 'CoolGuyModule_iCloudMemory WIFI;';
+  Blockly.Arduino.setups_['CoolGuyModule_iCloudMemory_init'] = 'WIFI.Serial_Init();'; 
+  var code = 'WIFI.iCloud_Read_Float('+str+','+pin+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.COOLGUY_iCloud_Write_String = function() {
+  var pin = this.getTitleValue('PIN');
+  var str3 = Blockly.Arduino.valueToCode(this, 'TEXT3', Blockly.Arduino.ORDER_ATOMIC) || 'String(\"\")'
+  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+    Blockly.Arduino.definitions_['define_iCloud_class'] = 'CoolGuyModule_iCloudMemory WIFI;';
+  Blockly.Arduino.setups_['CoolGuyModule_iCloudMemory_init'] = 'WIFI.Serial_Init();'; 
+  var code = 'WIFI.iCloud_Write('+pin+','+str3+');\n';
+  return code;
+};
+
+Blockly.Arduino.COOLGUY_iCloud_Write_Float = function() {
+  var pin = this.getTitleValue('PIN');
+  var num = Blockly.Arduino.valueToCode(this, 'num1',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+  Blockly.Arduino.definitions_['define_"CoolGuyRobot'] = '#include "CoolGuyRobot.h"';
+    Blockly.Arduino.definitions_['define_iCloud_class'] = 'CoolGuyModule_iCloudMemory WIFI;';
+    Blockly.Arduino.setups_['CoolGuyModule_iCloudMemory_init'] = 'WIFI.Serial_Init();'; 
+  var code = 'WIFI.iCloud_Write('+pin+','+num+');\n';
+  return code;
 };

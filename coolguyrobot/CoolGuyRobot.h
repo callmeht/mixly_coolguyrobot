@@ -6,9 +6,20 @@ version:V1.0
 #define CoolGuyRobot_h
 #endif
 
+
+/*里增加宏开关 为了让编译固件库的时候串口不冲突
+  屏蔽了 Scratch固件库就能编译，发送出正式版本的时候需要取消屏蔽，不然wifi的云内存不能使用
+*/
+#define _CoolGuyModule_iCloudMemory_BuildENABLE_
+#ifndef _CoolGuyModule_iCloudMemory_BuildENABLE_
+#pragma message("Not define _CoolGuyModule_iCloudMemory_BuildENABLE_ Please check command Line -> CoolGuyRobot.h 13")
+#endif
+
+
 #include <Arduino.h>
 #include "OneWire.h"
 
+#include "iic.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #ifndef F_CPU
@@ -51,7 +62,7 @@ version:V1.0
 #define ElectroniccompassandThreeAxis_adress 0x1E
 
 /*********************RGB**************************/
-#define USE_GLOBAL_BRIGHTNESS
+#define USE_GLOBAL_Brightness
 
 #ifdef RGB_ORDER_ON_RUNTIME
 #define OFFSET_R(r) r+offsetRed
@@ -64,25 +75,7 @@ version:V1.0
 #define OFFSET_B(b) b+2
 #endif
 
-const byte dim_curve[] =
-{
-	0, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3,
-	3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-	4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6,
-	6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8,
-	8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11, 11, 11,
-	11, 11, 12, 12, 12, 12, 12, 13, 13, 13, 13, 14, 14, 14, 14, 15,
-	15, 15, 16, 16, 16, 16, 17, 17, 17, 18, 18, 18, 19, 19, 19, 20,
-	20, 20, 21, 21, 22, 22, 22, 23, 23, 24, 24, 25, 25, 25, 26, 26,
-	27, 27, 28, 28, 29, 29, 30, 30, 31, 32, 32, 33, 33, 34, 35, 35,
-	36, 36, 37, 38, 38, 39, 40, 40, 41, 42, 43, 43, 44, 45, 46, 47,
-	48, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62,
-	63, 64, 65, 66, 68, 69, 70, 71, 73, 74, 75, 76, 78, 79, 81, 82,
-	83, 85, 86, 88, 90, 91, 93, 94, 96, 98, 99, 101, 103, 105, 107, 109,
-	110, 112, 114, 116, 118, 121, 123, 125, 127, 129, 132, 134, 136, 139, 141, 144,
-	146, 149, 151, 154, 157, 159, 162, 165, 168, 171, 174, 177, 180, 183, 186, 190,
-	193, 196, 200, 203, 207, 211, 214, 218, 222, 226, 230, 234, 238, 242, 248, 255,
-};
+
 
 #define w_zeropulse   350
 #define w_onepulse    900
@@ -235,8 +228,8 @@ class CoolGuyModule_OLED
 				static void OLED_Fill(unsigned char bmp_dat);
 				static void OLED_Set_Pos(unsigned char x, unsigned char y);
 				static void OLED_P8x16Ch(unsigned char x,unsigned char y,unsigned char N);
-				static void OLED_DrawString(unsigned char,unsigned char,String);
-				static void OLED_DrawValue(unsigned char,unsigned char,float);
+				static void OLED_Print(unsigned char,unsigned char,String);
+				static void OLED_Print(unsigned char,unsigned char,float);
 				
 	private:
 
@@ -268,27 +261,39 @@ class CoolGuyModule_Temperature_Read: public OneWire
 class CoolGuyModule_RTC
 {
 	public:
-		static void initial();
+		static void Initial();
 		static void Set_Time(int Year, int Month, int Date, int Hour, int Minutes, int Seconds);
-		static uint8_t Read_Time_Second();
-		static uint8_t Read_Time_Minute();
-		static uint8_t Read_Time_Hour();
-		static uint8_t Read_Time_Date();
-		static uint8_t Read_Time_Month();
-		static uint16_t Read_Time_Year();
+		static uint16_t Read_Time(int dat);
 	private:
-		static unsigned char rtctime[7];
+		static unsigned char RtcTime[7];
 
 
 };
 
+#ifdef _CoolGuyModule_iCloudMemory_BuildENABLE_
+//*************************************WiFi******************************
+class CoolGuyModule_iCloudMemory
+{
+	public:
+		CoolGuyModule_iCloudMemory();
+		String RevBuf[21];
+		void Serial_Init();
+		 String iCloud_Read_String(String MACaddr,int addr);
+		 float iCloud_Read_Float(String MACaddr,int addr);
+		void iCloud_Write(int addr,String data);
+		 void iCloud_Write(int addr,float data);
+	private:
+};
+#endif 
+
+
+//*******************************************************
+
 class CoolGuyModule_ElectroniccompassandThreeAxis
 {
 public:
-	static void initial();
-	static int XYZandHeading_display_X();
-	static int XYZandHeading_display_Y();
-	static int XYZandHeading_display_Z();
+	static void Initial();
+	static int XYZandHeading_display(uint8_t ZXY);
 	static double XYZandHeading_display_H();
 private:
 	static unsigned char xyz[7];
@@ -296,46 +301,42 @@ private:
 };
 
 
-/*class CoolGuyModule_WS2812
+class CoolGuyModule_WS2812
 {
 public:
 	CoolGuyModule_WS2812(uint16_t num_led);
 	~CoolGuyModule_WS2812();
 
 #ifndef ARDUINO
-	void setOutput(const volatile uint8_t* port, volatile uint8_t* reg, uint8_t pin);
+	void SetOutput(const volatile uint8_t* port, volatile uint8_t* reg, uint8_t pin);
 #else
-	void setOutput(uint8_t pin);
+	void SetOutput(uint8_t pin);
 #endif
 
 
-	uint32_t getRGB(uint16_t index);
-	uint8_t  getR(uint16_t index);
-	uint8_t  getG(uint16_t index);
-	uint8_t  getB(uint16_t index);
-	uint8_t  getH(uint16_t index);
-	uint8_t  getS(uint16_t index);
-	uint8_t  getV(uint16_t index);
-	void setRGB(uint16_t index, uint32_t rgb);
-	void setRGB(uint16_t index, uint8_t r, uint8_t g, uint8_t b);
-	void setHSV(uint16_t index, uint8_t hue, uint8_t sat, uint8_t val);  // hue between 0 and 191
-#ifdef USE_GLOBAL_BRIGHTNESS
-	void setBrightnessLinear(uint8_t _brightness)
+	uint32_t GetRGB();
+	uint8_t  GetR();
+	uint8_t  GetG();
+	uint8_t  GetB();
+	uint8_t  GetH(uint16_t index);
+	uint8_t  GetS(uint16_t index);
+	uint8_t  GetV(uint16_t index);
+	void SetRGB(uint8_t _Brightness, uint32_t rgb);
+	void SetRGB(uint8_t _Brightness, uint8_t r, uint8_t g, uint8_t b);
+#ifdef USE_GLOBAL_Brightness
+	
+	void SetBrightness(uint8_t _Brightness)
 	{
-		brightness = dim_curve[_brightness];
+		Brightness = _Brightness;
 	}
-	void setBrightness(uint8_t _brightness)
+	uint8_t GetBrightness()
 	{
-		brightness = _brightness;
-	}
-	uint8_t getBrightness()
-	{
-		return brightness;
+		return Brightness;
 	}
 #endif
 
 
-	void sync();
+	void Sync();
 
 #ifdef RGB_ORDER_ON_RUNTIME
 	void setColorOrderRGB();
@@ -346,8 +347,8 @@ public:
 private:
 	uint16_t count_led;
 	uint8_t *pixels;
-#ifdef USE_GLOBAL_BRIGHTNESS
-	uint8_t brightness;
+#ifdef USE_GLOBAL_Brightness
+	uint8_t Brightness;
 #endif
 	void CoolGuyModule_WS2812_sendarray_mask(uint8_t *array, uint16_t length, uint8_t pinmask, uint8_t *port, uint8_t *portreg);
 
@@ -362,8 +363,5 @@ private:
 #endif
 };
 
-
-#endif
-*/
 
 
