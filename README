@@ -14,5 +14,5 @@ this is a mixly library for coolguy robot.
 20171122 
   更正其他传感器模块和系统模块中，关于读数字引脚的setup里的代码，替换为pinMode(pin,HIGH);digitalwrite(pin,HIGH)
   更正同一模块不同管脚的输出只能初始化一次的问题，改为同一模块不同管脚可以多次初始化。
- 20180204
+20180204
   增加了 1）摄像头 2)Wi-Fi透传模块 3）RTC时钟 4）RGB灯 5）三轴加速度 6）数码管
